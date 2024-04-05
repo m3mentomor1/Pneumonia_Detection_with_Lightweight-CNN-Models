@@ -39,6 +39,10 @@ def load_resnet18_model(model_path_part1, model_path_part2):
 
 # Function to preprocess image
 def preprocess_image(image):
+    # Convert to RGB if image mode is not RGB
+    if image.mode != 'RGB':
+        image = image.convert('RGB')
+        
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
