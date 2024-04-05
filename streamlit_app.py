@@ -3,21 +3,19 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 import numpy as np
-import io
+import requests
+from io import BytesIO
 from collections import OrderedDict
 
 # Define class names
 class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
 
 # Function to load model
-def load_model(model_path):
-    if 'resnet18_model' in model_path:
-        model_path_part1 = 'Models/resnet18_model/resnet18_model.pth.part1'
-        model_path_part2 = 'Models/resnet18_model/resnet18_model.pth.part2'
-        model = load_resnet18_model(model_path_part1, model_path_part2)
-        return model
-    else:
-        model = torch.load(model_path, map_location=torch.device('cpu'))
+def load_model(model_url):
+    response = requests.get(model_url)
+    if response.status_code == 200:
+        model_bytes = BytesIO(response.content)
+        model = torch.load(model_bytes, map_location=torch.device('cpu'))
         if isinstance(model, OrderedDict):
             for key in model:
                 if hasattr(model[key], 'eval'):
@@ -31,17 +29,20 @@ def load_model(model_path):
             return model
         else:
             return None
+    else:
+        return None
 
 # Function to load ResNet-18 model
-def load_resnet18_model(model_path_part1, model_path_part2):
-    with open(model_path_part1, 'rb') as part1_file:
-        part1 = part1_file.read()
-    with open(model_path_part2, 'rb') as part2_file:
-        part2 = part2_file.read()
-    model_bytes = part1 + part2
-    model = torch.load(io.BytesIO(model_bytes), map_location=torch.device('cpu'))
-    model.eval()
-    return model
+def load_resnet18_model(model_url_part1, model_url_part2):
+    response1 = requests.get(model_url_part1)
+    response2 = requests.get(model_url_part2)
+    if response1.status_code == 200 and response2.status_code == 200:
+        model_bytes = BytesIO(response1.content + response2.content)
+        model = torch.load(model_bytes, map_location=torch.device('cpu'))
+        model.eval()
+        return model
+    else:
+        return None
 
 # Function to preprocess image
 def preprocess_image(image):
@@ -73,26 +74,21 @@ model_name = st.selectbox('Select Model', ['MobileNet-V2', 'ShuffleNet-V2', 'Squ
 
 # Load selected model
 if model_name == 'MobileNet-V2':
-    # Replace 'MOBILENET_V2_MODEL_DOWNLOAD_LINK' with the correct URL for the MobileNet-V2 model file
-    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/mobilenetv2_model.pth'
-    model = load_model(model_path)
+    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/mobilenetv2_model.pth'
+    model = load_model(model_url)
 elif model_name == 'ShuffleNet-V2':
-    # Replace 'SHUFFLENET_V2_MODEL_DOWNLOAD_LINK' with the correct URL for the ShuffleNet-V2 model file
-    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/shufflenetv2_model.pth'
-    model = load_model(model_path)
+    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/shufflenetv2_model.pth'
+    model = load_model(model_url)
 elif model_name == 'SqueezeNet 1.1':
-    # Replace 'SQUEEZENET_1_1_MODEL_DOWNLOAD_LINK' with the correct URL for the SqueezeNet 1.1 model file
-    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth'
-    model = load_model(model_path)
+    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth'
+    model = load_model(model_url)
 elif model_name == 'ResNet-18':
-    # Replace 'RESNET_18_MODEL_DOWNLOAD_LINK' with the correct URL for the ResNet-18 model file
-    model_path_part1 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1'
-    model_path_part2 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2'
-    model = load_resnet18_model(model_path_part1, model_path_part2)
+    model_url_part1 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1'
+    model_url_part2 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2'
+    model = load_resnet18_model(model_url_part1, model_url_part2)
 elif model_name == 'EfficientNet-B0':
-    # Replace 'EFFICIENTNET_B0_MODEL_DOWNLOAD_LINK' with the correct URL for the EfficientNet-B0 model file
-    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth'
-    model = load_model(model_path)
+    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth'
+    model = load_model(model_url)
 
 # Image upload
 uploaded_image = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
