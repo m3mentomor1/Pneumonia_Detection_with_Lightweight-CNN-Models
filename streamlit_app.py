@@ -3,18 +3,18 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 import numpy as np
+import io  # Add this import for loading ResNet-18 model
 
 # Define class names
 class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
 
 # Function to load model
 def load_model(model_path):
-    if model_path.endswith('.part1'):
-        return None  # ResNet-18 loading is handled separately
-    else:
-        model = torch.load(model_path, map_location=torch.device('cpu'))
-        model.eval()
-        return model
+    model = torch.load(model_path, map_location=torch.device('cpu'))
+    if isinstance(model, collections.OrderedDict):
+        model = model['model']  # Adjust this if your model is stored with a different key
+    model.eval()
+    return model
 
 # Function to load ResNet-18 model
 def load_resnet18_model(model_path_part1, model_path_part2):
