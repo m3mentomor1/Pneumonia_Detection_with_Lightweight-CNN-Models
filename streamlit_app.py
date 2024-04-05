@@ -4,7 +4,7 @@ import torch
 import torchvision.transforms as transforms
 import numpy as np
 import io
-from collections import OrderedDict  # Add this import for OrderedDict
+from collections import OrderedDict
 
 # Define class names
 class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
@@ -13,9 +13,18 @@ class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
 def load_model(model_path):
     model = torch.load(model_path, map_location=torch.device('cpu'))
     if isinstance(model, OrderedDict):
-        model = model['model']  # Adjust this if your model is stored with a different key
-    model.eval()
-    return model
+        for key in model:
+            if hasattr(model[key], 'eval'):
+                model = model[key]
+                model.eval()
+                return model
+        # If no key with eval attribute is found, return None
+        return None
+    elif hasattr(model, 'eval'):
+        model.eval()
+        return model
+    else:
+        return None
 
 # Function to load ResNet-18 model
 def load_resnet18_model(model_path_part1, model_path_part2):
