@@ -72,12 +72,26 @@ st.title('Pneumonia Image Classification')
 model_name = st.selectbox('Select Model', ['MobileNet-V2', 'ShuffleNet-V2', 'SqueezeNet 1.1', 'ResNet-18', 'EfficientNet-B0'])
 
 # Load selected model
-if model_name == 'ResNet-18':
-    model_path_part1 = 'Models/resnet18_model/resnet18_model.pth.part1'
-    model_path_part2 = 'Models/resnet18_model/resnet18_model.pth.part2'
+if model_name == 'MobileNet-V2':
+    # Replace 'MOBILENET_V2_MODEL_DOWNLOAD_LINK' with the direct download link to the MobileNet-V2 model file
+    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/mobilenetv2_model.pth'
+    model = load_model(model_path)
+elif model_name == 'ShuffleNet-V2':
+    # Replace 'SHUFFLENET_V2_MODEL_DOWNLOAD_LINK' with the direct download link to the ShuffleNet-V2 model file
+    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/shufflenetv2_model.pth'
+    model = load_model(model_path)
+elif model_name == 'SqueezeNet 1.1':
+    # Replace 'SQUEEZENET_1_1_MODEL_DOWNLOAD_LINK' with the direct download link to the SqueezeNet 1.1 model file
+    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth'
+    model = load_model(model_path)
+elif model_name == 'ResNet-18':
+    # Replace 'RESNET_18_MODEL_DOWNLOAD_LINK' with the direct download link to the ResNet-18 model file
+    model_path_part1 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1'
+    model_path_part2 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2'
     model = load_resnet18_model(model_path_part1, model_path_part2)
-else:
-    model_path = f'Models/{model_name.lower().replace("-", "")}_model.pth'
+elif model_name == 'EfficientNet-B0':
+    # Replace 'EFFICIENTNET_B0_MODEL_DOWNLOAD_LINK' with the direct download link to the EfficientNet-B0 model file
+    model_path = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth'
     model = load_model(model_path)
 
 # Image upload
