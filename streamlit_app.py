@@ -3,7 +3,8 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 import numpy as np
-import io  # Add this import for loading ResNet-18 model
+import io
+from collections import OrderedDict  # Add this import for OrderedDict
 
 # Define class names
 class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
@@ -11,7 +12,7 @@ class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
 # Function to load model
 def load_model(model_path):
     model = torch.load(model_path, map_location=torch.device('cpu'))
-    if isinstance(model, collections.OrderedDict):
+    if isinstance(model, OrderedDict):
         model = model['model']  # Adjust this if your model is stored with a different key
     model.eval()
     return model
