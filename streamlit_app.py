@@ -13,6 +13,18 @@ base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-
 mobilenet_model_path = base_url + "mobilenetv2_model.pth"
 shufflenet_model_path = base_url + "shufflenetv2_model.pth"
 
+# Load the MobileNetV2 model
+mobilenet_model = mobilenet_v2(pretrained=False)
+mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
+mobilenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu')))
+mobilenet_model.eval()
+
+# Load the ShuffleNetV2 model
+shufflenet_model = shufflenet_v2_x1_0(pretrained=False)
+shufflenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
+shufflenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
+shufflenet_model.eval()
+
 # Define the transformations for input images
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -26,16 +38,13 @@ st.title("Pneumonia Detection in Chest X-ray Images")
 # Model selection
 selected_model = st.selectbox("Select Model", ["MobileNetV2", "ShuffleNetV2"])
 
+# Determine selected model
 if selected_model == "MobileNetV2":
-    # Load the MobileNetV2 model
-    model = mobilenet_v2(pretrained=False)
-    model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-    model.load_state_dict(torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu')))
+    model = mobilenet_model
+    model_name = "MobileNetV2"
 elif selected_model == "ShuffleNetV2":
-    # Load the ShuffleNetV2 model
-    model = shufflenet_v2_x1_0(pretrained=False)
-    model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
-    model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
+    model = shufflenet_model
+    model_name = "ShuffleNetV2"
 else:
     st.error("Invalid model selection")
 
@@ -50,8 +59,7 @@ if uploaded_image is not None:
     st.image(test_image, caption='Uploaded Image', use_column_width=True)
 
     # Apply transformations to the test image
-    input_image = transform(test_image)
-    input_image = input_image.unsqueeze(0)  # Add batch dimension
+    input_image = transform(test_image).unsqueeze(0)
 
     # Make prediction
     with torch.no_grad():
@@ -71,6 +79,6 @@ if uploaded_image is not None:
     confidence_decimal = round(confidence.item(), 4)
 
     # Display the prediction
-    st.write(f"Model: {selected_model}")
+    st.write(f"Model: {model_name}")
     st.write(f"Predicted Class: {predicted_class}")
     st.write(f"Confidence: {confidence_percentage}% ({confidence_decimal})")
