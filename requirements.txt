@@ -1,5 +1,7 @@
+efficientnet-pytorch
+matplotlib
+pandas
+Pillow
 streamlit
 torch
 torchvision
-Pillow
-numpy
