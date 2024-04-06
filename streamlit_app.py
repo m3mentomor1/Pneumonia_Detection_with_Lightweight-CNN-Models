@@ -32,18 +32,6 @@ def load_model(model_url):
     else:
         return None
 
-# Function to load ResNet-18 model
-def load_resnet18_model(model_url_part1, model_url_part2):
-    response1 = requests.get(model_url_part1)
-    response2 = requests.get(model_url_part2)
-    if response1.status_code == 200 and response2.status_code == 200:
-        model_bytes = BytesIO(response1.content + response2.content)
-        model = torch.load(model_bytes, map_location=torch.device('cpu'))
-        model.eval()
-        return model
-    else:
-        return None
-
 # Function to preprocess image
 def preprocess_image(image):
     # Convert to RGB if image mode is not RGB
@@ -73,6 +61,7 @@ st.title('Pneumonia Image Classification')
 model_name = st.selectbox('Select Model', ['MobileNet-V2', 'ShuffleNet-V2', 'SqueezeNet 1.1', 'ResNet-18', 'EfficientNet-B0'])
 
 # Load selected model
+model = None
 if model_name == 'MobileNet-V2':
     model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/mobilenetv2_model.pth'
     model = load_model(model_url)
@@ -83,9 +72,7 @@ elif model_name == 'SqueezeNet 1.1':
     model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth'
     model = load_model(model_url)
 elif model_name == 'ResNet-18':
-    model_url_part1 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1'
-    model_url_part2 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2'
-    model = load_resnet18_model(model_url_part1, model_url_part2)
+    st.write("ResNet-18 model loading is not supported in this version of the app.")
 elif model_name == 'EfficientNet-B0':
     model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth'
     model = load_model(model_url)
