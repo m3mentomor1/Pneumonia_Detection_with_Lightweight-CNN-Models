@@ -9,47 +9,44 @@ import torch.nn.functional as F
 import requests
 from io import BytesIO
 
-# Function to load model from GitHub URL
-def load_model_from_github(model_url):
-    response = requests.get(model_url)
-    model_bytes = BytesIO(response.content)
-    return torch.load(model_bytes, map_location=torch.device('cpu'))
+# Define the base URL of the GitHub repository
+base_url = "https://raw.githubusercontent.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/main/Models/"
 
 # Define the paths of the saved models
-mobilenet_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/mobilenetv2_model.pth"
-shufflenet_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/shufflenetv2_model.pth"
-squeezenet_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth"
-resnet_model_path_1 = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1"
-resnet_model_path_2 = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2"
-efficient_net_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth"
+mobilenet_model_path = base_url + "mobilenetv2_model.pth"
+shufflenet_model_path = base_url + "shufflenetv2_model.pth"
+squeezenet_model_path = base_url + "squeezenet1_1_model.pth"
+resnet_model_path_1 = base_url + "resnet18_model/resnet18_model.pth.part1"
+resnet_model_path_2 = base_url + "resnet18_model/resnet18_model.pth.part2"
+efficient_net_model_path = base_url + "efficientnetb0_model.pth"
 
 # Load the models from the saved paths
-mobilenet_model = mobilenet_v2(pretrained=True)
+mobilenet_model = mobilenet_v2(weights='imagenet')
 mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-mobilenet_model.load_state_dict(load_model_from_github(mobilenet_model_path))
+mobilenet_model.load_state_dict(torch.load(requests.get(mobilenet_model_path, allow_redirects=True).content, map_location=torch.device('cpu')))
 mobilenet_model.eval()
 
-shufflenet_model = shufflenet_v2_x1_0(pretrained=True)
+shufflenet_model = shufflenet_v2_x1_0(weights='imagenet')
 shufflenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
-shufflenet_model.load_state_dict(load_model_from_github(shufflenet_model_path))
+shufflenet_model.load_state_dict(torch.load(requests.get(shufflenet_model_path, allow_redirects=True).content, map_location=torch.device('cpu')))
 shufflenet_model.eval()
 
-squeezenet_model = squeezenet1_1(pretrained=True)
+squeezenet_model = squeezenet1_1(weights='imagenet')
 squeezenet_model.classifier[1] = torch.nn.Conv2d(512, 3, kernel_size=(1, 1), stride=(1, 1))
-squeezenet_model.load_state_dict(load_model_from_github(squeezenet_model_path))
+squeezenet_model.load_state_dict(torch.load(requests.get(squeezenet_model_path, allow_redirects=True).content, map_location=torch.device('cpu')))
 squeezenet_model.eval()
 
-resnet_model_1 = resnet18(pretrained=True)
+resnet_model_1 = resnet18(weights='imagenet')
 resnet_model_1.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
-resnet_model_1.load_state_dict(load_model_from_github(resnet_model_path_1))
-resnet_model_2 = load_model_from_github(resnet_model_path_2)
+resnet_model_1.load_state_dict(torch.load(requests.get(resnet_model_path_1, allow_redirects=True).content, map_location=torch.device('cpu')))
+resnet_model_2 = torch.load(BytesIO(requests.get(resnet_model_path_2, allow_redirects=True).content), map_location=torch.device('cpu'))
 resnet_model_2.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
 resnet_model_1.eval()
 resnet_model_2.eval()
 
 efficient_net_model = EfficientNet.from_name('efficientnet-b0')
 efficient_net_model._fc = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-efficient_net_model.load_state_dict(load_model_from_github(efficient_net_model_path))
+efficient_net_model.load_state_dict(torch.load(requests.get(efficient_net_model_path, allow_redirects=True).content, map_location=torch.device('cpu')))
 efficient_net_model.eval()
 
 # Define the transformations for input images
