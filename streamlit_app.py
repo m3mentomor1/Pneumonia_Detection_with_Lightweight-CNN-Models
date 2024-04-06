@@ -5,7 +5,6 @@ from torchvision.models import mobilenet_v2
 from PIL import Image
 import requests
 import io
-import torch.nn.functional as F
 
 # Define the base URL of the GitHub repository
 base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/"
@@ -13,23 +12,11 @@ base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-
 # Define the path of the saved model
 mobilenet_model_path = base_url + "mobilenetv2_model.pth"
 
-# Load the MobileNet-V2 model
+# Load the model from the saved path
 mobilenet_model = mobilenet_v2(pretrained=False)
 mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-
-try:
-    # Load the model's state dict from the provided path
-    state_dict = torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu'))
-    mobilenet_model.load_state_dict(state_dict)
-    st.success("MobileNet-V2 model loaded successfully!")
-except Exception as e:
-    st.error(f"Error loading MobileNet-V2 model: {e}")
-
-# Header
-st.title("Pneumonia Detection in Chest X-ray Images")
-
-# Upload image
-uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+mobilenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu')))
+mobilenet_model.eval()
 
 # Define the transformations for input images
 transform = transforms.Compose([
@@ -38,33 +25,33 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-# Function to make predictions
-def predict(image):
-    # Ensure the image is not None
-    if image is not None:
-        # Load the uploaded image
-        img = Image.open(image).convert('RGB')
+# Header
+st.title("Pneumonia Detection in Chest X-ray Images")
 
-        # Display the uploaded image
-        st.image(img, caption='Uploaded Image', use_column_width=True)
+# Upload image
+uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-        # Apply transformations to the test image
-        input_image = transform(img).unsqueeze(0)
+if uploaded_image is not None:
+    # Load the uploaded image
+    test_image = Image.open(uploaded_image).convert('RGB')
 
-        # Make prediction
-        with torch.no_grad():
-            mobilenet_model.to(torch.device('cpu'))
-            output = mobilenet_model(input_image)
-            probabilities = F.softmax(output, dim=1)
-            confidence, predicted = torch.max(probabilities, 1)
+    # Display the uploaded image
+    st.image(test_image, caption='Uploaded Image', use_column_width=True)
 
-        # Define class names in the correct order
-        class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
-        predicted_class = class_names[predicted.item()]
+    # Apply transformations to the uploaded image
+    input_image = transform(test_image).unsqueeze(0)
 
-        # Display the prediction
-        st.write(f"Predicted Class: {predicted_class}")
-        st.write(f"Confidence: {round(confidence.item(), 4)}")
+    # Make prediction
+    with torch.no_grad():
+        mobilenet_model.to(torch.device('cpu'))
+        output = mobilenet_model(input_image)
+        probabilities = torch.softmax(output, dim=1)
+        confidence, predicted = torch.max(probabilities, 1)
 
-# Trigger prediction upon image upload
-predict(uploaded_image)
+    # Decode the predicted class
+    class_names = ['Normal', 'Bacterial Pneumonia', 'Viral Pneumonia']
+    predicted_class = class_names[predicted.item()]
+
+    # Display the prediction
+    st.write(f"Predicted Class: {predicted_class}")
+    st.write(f"Confidence: {confidence.item()}"
