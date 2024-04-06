@@ -59,7 +59,7 @@ def predict(image):
             confidence, predicted = torch.max(probabilities, 1)
 
         # Define class names in the correct order
-        class_names = ['Normal', 'Bacterial Pneumonia', 'Viral Pneumonia']
+        class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
         predicted_class = class_names[predicted.item()]
 
         # Display the prediction
