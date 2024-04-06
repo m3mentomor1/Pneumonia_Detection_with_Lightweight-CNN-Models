@@ -10,7 +10,7 @@ import requests
 from io import BytesIO
 
 # Define the base URL of the GitHub repository
-base_url = "https://raw.githubusercontent.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/main/Models/"
+base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/tree/main/Models"
 
 # Define the paths of the saved models
 mobilenet_model_path = base_url + "mobilenetv2_model.pth"
