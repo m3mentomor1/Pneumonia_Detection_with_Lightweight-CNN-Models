@@ -38,6 +38,13 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
+# Define class mapping dictionary
+class_mapping = {
+    0: 'Bacterial Pneumonia',
+    1: 'Normal',
+    2: 'Viral Pneumonia'
+}
+
 # Function to make predictions
 def predict(image):
     # Ensure the image is not None
@@ -58,9 +65,8 @@ def predict(image):
             probabilities = F.softmax(output, dim=1)
             confidence, predicted = torch.max(probabilities, 1)
 
-        # Decode the predicted class
-        class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
-        predicted_class = class_names[predicted.item()]
+        # Decode the predicted class using class mapping
+        predicted_class = class_mapping[predicted.item()]
 
         # Display the prediction
         st.write(f"Predicted Class: {predicted_class}")
