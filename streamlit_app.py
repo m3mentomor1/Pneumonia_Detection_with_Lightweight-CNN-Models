@@ -54,4 +54,4 @@ if uploaded_image is not None:
 
     # Display the prediction
     st.write(f"Predicted Class: {predicted_class}")
-    st.write(f"Confidence: {confidence.item()}"
+    st.write(f"Confidence: {confidence.item()}")
