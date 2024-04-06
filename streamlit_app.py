@@ -13,6 +13,13 @@ base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-
 mobilenet_model_path = base_url + "mobilenetv2_model.pth"
 shufflenet_model_path = base_url + "shufflenetv2_model.pth"
 
+# Define the transformations for input images
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
 # Header
 st.title("Pneumonia Detection in Chest X-ray Images")
 
@@ -32,13 +39,6 @@ elif selected_model == "ShuffleNetV2":
 else:
     st.error("Invalid model selection")
 
-# Define the transformations for input images
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-])
-
 # Upload image
 uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
@@ -50,7 +50,8 @@ if uploaded_image is not None:
     st.image(test_image, caption='Uploaded Image', use_column_width=True)
 
     # Apply transformations to the test image
-    input_image = transform(test_image).unsqueeze(0)
+    input_image = transform(test_image)
+    input_image = input_image.unsqueeze(0)  # Add batch dimension
 
     # Make prediction
     with torch.no_grad():
