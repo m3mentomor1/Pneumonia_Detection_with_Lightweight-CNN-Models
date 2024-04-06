@@ -17,6 +17,7 @@ def load_model(model_url):
         st.write("Model loaded successfully")
         model_bytes = BytesIO(response.content)
         model = torch.load(model_bytes, map_location=torch.device('cpu'))
+        st.write(f"Model type: {type(model)}")
         if isinstance(model, OrderedDict):
             for key in model:
                 if hasattr(model[key], 'eval'):
@@ -42,6 +43,7 @@ def load_resnet18_model(model_url_part1, model_url_part2):
         st.write("ResNet-18 model loaded successfully")
         model_bytes = BytesIO(response_part1.content + response_part2.content)
         model = torch.load(model_bytes, map_location=torch.device('cpu'))
+        st.write(f"Model type: {type(model)}")
         if isinstance(model, OrderedDict):
             for key in model:
                 if hasattr(model[key], 'eval'):
