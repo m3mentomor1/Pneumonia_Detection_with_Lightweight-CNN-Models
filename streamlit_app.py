@@ -1,78 +1,120 @@
 import streamlit as st
-from PIL import Image
 import torch
 import torchvision.transforms as transforms
-import numpy as np
-import requests
-from io import BytesIO
+from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, squeezenet1_1, resnet18
+from PIL import Image
+import pandas as pd
+import matplotlib.pyplot as plt
+from efficientnet_pytorch import EfficientNet
+import torch.nn.functional as F
 
-# Define class names
-class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
+# Define the paths of the saved models
+mobilenet_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/mobilenetv2_model.pth"
+shufflenet_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/shufflenetv2_model.pth"
+squeezenet_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/squeezenet1_1_model.pth"
+resnet_model_path_1 = "https://github.com/yourusername/yourrepo/raw/main/models/resnet18_model_part1.pth"
+resnet_model_path_2 = "https://github.com/yourusername/yourrepo/raw/main/models/resnet18_model_part2.pth"
+efficient_net_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/efficientnetb0_model.pth"
 
-# Function to load model
-def load_model(model_url):
-    model = torch.hub.load_state_dict_from_url(model_url, map_location=torch.device('cpu'))
-    model.eval()
-    return model
+# Load the models from the saved paths
+mobilenet_model = mobilenet_v2(pretrained=True)
+mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
+mobilenet_model.load_state_dict(torch.load(mobilenet_model_path, map_location=torch.device('cpu')))
+mobilenet_model.eval()
 
-# Function to preprocess image
-def preprocess_image(image):
-    # Convert to RGB if image mode is not RGB
-    if image.mode != 'RGB':
-        image = image.convert('RGB')
-        
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
-    image = transform(image).unsqueeze(0)
-    return image
+shufflenet_model = shufflenet_v2_x1_0(pretrained=True)
+shufflenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
+shufflenet_model.load_state_dict(torch.load(shufflenet_model_path, map_location=torch.device('cpu')))
+shufflenet_model.eval()
 
-# Function for prediction
-def predict_image(image, model):
-    with torch.no_grad():
-        outputs = model(image)
-        _, predicted = torch.max(outputs, 1)
-        confidence = torch.nn.functional.softmax(outputs, dim=1)[0] * 100
-    return predicted.item(), confidence.numpy()
+squeezenet_model = squeezenet1_1(pretrained=True)
+squeezenet_model.classifier[1] = torch.nn.Conv2d(512, 3, kernel_size=(1, 1), stride=(1, 1))
+squeezenet_model.load_state_dict(torch.load(squeezenet_model_path, map_location=torch.device('cpu')))
+squeezenet_model.eval()
 
-# Streamlit app
-st.title('Pneumonia Image Classification')
+resnet_model_1 = resnet18(pretrained=True)
+resnet_model_1.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
+resnet_model_1.load_state_dict(torch.load(resnet_model_path_1, map_location=torch.device('cpu')))
+resnet_model_2 = torch.load(resnet_model_path_2, map_location=torch.device('cpu'))
+resnet_model_2.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
+resnet_model_1.eval()
+resnet_model_2.eval()
 
-# Model selection
-model_name = st.selectbox('Select Model', ['MobileNet-V2', 'ShuffleNet-V2', 'SqueezeNet 1.1', 'ResNet-18', 'EfficientNet-B0'])
+efficient_net_model = EfficientNet.from_name('efficientnet-b0')
+efficient_net_model._fc = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
+efficient_net_model.load_state_dict(torch.load(efficient_net_model_path, map_location=torch.device('cpu')))
+efficient_net_model.eval()
 
-# Load selected model
-if model_name == 'MobileNet-V2':
-    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/mobilenetv2_model.pth'
-    model = load_model(model_url)
-elif model_name == 'ShuffleNet-V2':
-    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/shufflenetv2_model.pth'
-    model = load_model(model_url)
-elif model_name == 'SqueezeNet 1.1':
-    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth'
-    model = load_model(model_url)
-elif model_name == 'ResNet-18':
-    model_url_part1 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1'
-    model_url_part2 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2'
-    model = load_model(model_url_part1, model_url_part2)
-elif model_name == 'EfficientNet-B0':
-    model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth'
-    model = load_model(model_url)
+# Define the transformations for input images
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
 
-# Image upload
-uploaded_image = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
+# Define the models dictionary
+models = {
+    "MobileNet-V2": mobilenet_model,
+    "ShuffleNet-V2": shufflenet_model,
+    "SqueezeNet 1.1": squeezenet_model,
+    "ResNet-18": [resnet_model_1, resnet_model_2],
+    "EfficientNet-B0": efficient_net_model
+}
+
+# Header
+st.title("Pneumonia Detection in Chest X-ray Images")
+
+# Upload image
+uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
-    image = Image.open(uploaded_image)
-    st.image(image, caption='Uploaded Image', use_column_width=True)
-    transformed_image = preprocess_image(image)
-    
-    # Classify image
-    if model is not None:
-        prediction, confidence = predict_image(transformed_image, model)
-        st.write(f"Prediction: {class_names[prediction]}")
-        st.write(f"Confidence: {confidence[prediction]:.2f}%")
-    else:
-        st.write("Selected model not supported")
+    # Load the uploaded image
+    test_image = Image.open(uploaded_image).convert('RGB')
+
+    # Display the uploaded image
+    st.image(test_image, caption='Uploaded Image', use_column_width=True)
+
+    # Create a dataframe to store the predictions for this image
+    predictions = {'Model': [], 'Predicted Class': [], 'Real Class': [], 'Correct': [], 'Confidence': []}
+
+    # Iterate through each model and make predictions
+    for model_name, model in models.items():
+        if model_name == "ResNet-18":
+            output = []
+            for resnet_model in model:
+                # Apply transformations to the test image
+                input_image = transform(test_image).unsqueeze(0)
+
+                # Make prediction
+                with torch.no_grad():
+                    resnet_model.to(torch.device('cpu'))
+                    output.append(F.softmax(resnet_model(input_image), dim=1))
+            probabilities = torch.mean(torch.stack(output), dim=0)
+            confidence, predicted = torch.max(probabilities, 1)
+        else:
+            # Apply transformations to the test image
+            input_image = transform(test_image).unsqueeze(0)
+
+            # Make prediction
+            with torch.no_grad():
+                model.to(torch.device('cpu'))
+                output = model(input_image)
+                probabilities = F.softmax(output, dim=1)
+                confidence, predicted = torch.max(probabilities, 1)
+
+        # Decode the predicted class
+        class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
+        predicted_class = class_names[predicted.item()]
+
+        # Add the predictions to the dictionary
+        predictions['Model'].append(model_name)
+        predictions['Predicted Class'].append(predicted_class)
+        predictions['Real Class'].append("N/A")  # Real class not available when using uploaded image
+        predictions['Correct'].append("N/A")  # Correctness not available when using uploaded image
+        predictions['Confidence'].append(round(confidence.item(), 4))  # Round to 4 decimal places
+
+    # Create a dataframe from the predictions dictionary
+    df = pd.DataFrame(predictions)
+
+    # Display the dataframe
+    st.write(df)
