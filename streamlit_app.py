@@ -66,6 +66,9 @@ st.title("Pneumonia Detection in Chest X-ray Images")
 # Upload image
 uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
+# Model selection
+selected_model = st.selectbox("Select Model", list(models.keys()))
+
 if uploaded_image is not None:
     # Load the uploaded image
     test_image = Image.open(uploaded_image).convert('RGB')
@@ -73,36 +76,37 @@ if uploaded_image is not None:
     # Display the uploaded image
     st.image(test_image, caption='Uploaded Image', use_column_width=True)
 
-    # Iterate through each model and make predictions
-    for model_name, model in models.items():
-        if model_name == "ResNet-18":
-            output = []
-            for resnet_model in model:
-                # Apply transformations to the test image
-                input_image = transform(test_image).unsqueeze(0)
+    # Use the selected model for prediction
+    model = models[selected_model]
 
-                # Make prediction
-                with torch.no_grad():
-                    resnet_model.to(torch.device('cpu'))
-                    output.append(F.softmax(resnet_model(input_image), dim=1))
-            probabilities = torch.mean(torch.stack(output), dim=0)
-            confidence, predicted = torch.max(probabilities, 1)
-        else:
+    if selected_model == "ResNet-18":
+        output = []
+        for resnet_model in model:
             # Apply transformations to the test image
             input_image = transform(test_image).unsqueeze(0)
 
             # Make prediction
             with torch.no_grad():
-                model.to(torch.device('cpu'))
-                output = model(input_image)
-                probabilities = F.softmax(output, dim=1)
-                confidence, predicted = torch.max(probabilities, 1)
+                resnet_model.to(torch.device('cpu'))
+                output.append(F.softmax(resnet_model(input_image), dim=1))
+        probabilities = torch.mean(torch.stack(output), dim=0)
+        confidence, predicted = torch.max(probabilities, 1)
+    else:
+        # Apply transformations to the test image
+        input_image = transform(test_image).unsqueeze(0)
 
-        # Decode the predicted class
-        class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
-        predicted_class = class_names[predicted.item()]
+        # Make prediction
+        with torch.no_grad():
+            model.to(torch.device('cpu'))
+            output = model(input_image)
+            probabilities = F.softmax(output, dim=1)
+            confidence, predicted = torch.max(probabilities, 1)
 
-        # Display the prediction
-        st.write(f"Model: {model_name}")
-        st.write(f"Predicted Class: {predicted_class}")
-        st.write(f"Confidence: {round(confidence.item(), 4)}")
+    # Decode the predicted class
+    class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
+    predicted_class = class_names[predicted.item()]
+
+    # Display the prediction
+    st.write(f"Model: {selected_model}")
+    st.write(f"Predicted Class: {predicted_class}")
+    st.write(f"Confidence: {round(confidence.item(), 4)}")
