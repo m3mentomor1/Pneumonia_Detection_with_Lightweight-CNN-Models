@@ -66,6 +66,5 @@ def predict(image):
         st.write(f"Predicted Class: {predicted_class}")
         st.write(f"Confidence: {round(confidence.item(), 4)}")
 
-# Button to trigger prediction
-if st.button('Predict'):
-    predict(uploaded_image)
+# Trigger prediction upon image upload
+predict(uploaded_image)
