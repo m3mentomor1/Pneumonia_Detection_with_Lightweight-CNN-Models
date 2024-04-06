@@ -8,46 +8,42 @@ from efficientnet_pytorch import EfficientNet
 import torch.nn.functional as F
 import requests
 import io
+import zipfile
 
 # Define the base URL of the GitHub repository
-base_url = "https://raw.githubusercontent.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/main/Models/"
+base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/"
 
-# Define the paths of the saved models
-mobilenet_model_path = base_url + "mobilenetv2_model.pth"
-shufflenet_model_path = base_url + "shufflenetv2_model.pth"
-squeezenet_model_path = base_url + "squeezenet1_1_model.pth"
-resnet_model_path_1 = base_url + "resnet18_model/resnet18_model.pth.part1"
-resnet_model_path_2 = base_url + "resnet18_model/resnet18_model.pth.part2"
-efficient_net_model_path = base_url + "efficientnetb0_model.pth"
+# Function to download and extract zip files
+def download_and_extract_zip(url, target_path):
+    response = requests.get(url)
+    with zipfile.ZipFile(io.BytesIO(response.content), 'r') as zip_ref:
+        zip_ref.extractall(target_path)
 
-# Load the models from the saved paths
-mobilenet_model = mobilenet_v2(pretrained=False)
-mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-mobilenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu')))
-mobilenet_model.eval()
+# Define the URLs of the zip files
+resnet_model_zip_url_1 = base_url + "resnet18_model/resnet18_model.zip"
+resnet_model_zip_url_2 = base_url + "resnet18_model/resnet18_model.zip"
 
-shufflenet_model = shufflenet_v2_x1_0(pretrained=False)
-shufflenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
-shufflenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
-shufflenet_model.eval()
+# Define target paths for extracted files
+target_path_1 = 'temp/resnet18_model'
+target_path_2 = 'temp/resnet18_model'
 
-squeezenet_model = squeezenet1_1(pretrained=False)
-squeezenet_model.classifier[1] = torch.nn.Conv2d(512, 3, kernel_size=(1, 1), stride=(1, 1))
-squeezenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(squeezenet_model_path).content), map_location=torch.device('cpu')))
-squeezenet_model.eval()
+# Download and extract the zip files
+download_and_extract_zip(resnet_model_zip_url_1, target_path_1)
+download_and_extract_zip(resnet_model_zip_url_2, target_path_2)
 
+# Define the paths of the extracted model files
+resnet_model_path_1 = 'temp/resnet18_model/resnet18_model.pth.part1'
+resnet_model_path_2 = 'temp/resnet18_model/resnet18_model.pth.part2'
+
+# Load the models from the extracted paths
 resnet_model_1 = resnet18(pretrained=False)
 resnet_model_1.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
-resnet_model_1.load_state_dict(torch.load(io.BytesIO(requests.get(resnet_model_path_1).content), map_location=torch.device('cpu')))
-resnet_model_2 = torch.load(io.BytesIO(requests.get(resnet_model_path_2).content), map_location=torch.device('cpu'))
-resnet_model_2.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
+resnet_model_1.load_state_dict(torch.load(resnet_model_path_1, map_location=torch.device('cpu')))
 resnet_model_1.eval()
-resnet_model_2.eval()
 
-efficient_net_model = EfficientNet.from_name('efficientnet-b0', pretrained=False)
-efficient_net_model._fc = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-efficient_net_model.load_state_dict(torch.load(io.BytesIO(requests.get(efficient_net_model_path).content), map_location=torch.device('cpu')))
-efficient_net_model.eval()
+resnet_model_2 = torch.load(resnet_model_path_2, map_location=torch.device('cpu'))
+resnet_model_2.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
+resnet_model_2.eval()
 
 # Define the transformations for input images
 transform = transforms.Compose([
@@ -58,11 +54,7 @@ transform = transforms.Compose([
 
 # Define the models dictionary
 models = {
-    "MobileNet-V2": mobilenet_model,
-    "ShuffleNet-V2": shufflenet_model,
-    "SqueezeNet 1.1": squeezenet_model,
-    "ResNet-18": [resnet_model_1, resnet_model_2],
-    "EfficientNet-B0": efficient_net_model
+    "ResNet-18": [resnet_model_1, resnet_model_2]
 }
 
 # Header
@@ -96,16 +88,6 @@ if uploaded_image is not None:
                 output.append(F.softmax(resnet_model(input_image), dim=1))
         probabilities = torch.mean(torch.stack(output), dim=0)
         confidence, predicted = torch.max(probabilities, 1)
-    else:
-        # Apply transformations to the test image
-        input_image = transform(test_image).unsqueeze(0)
-
-        # Make prediction
-        with torch.no_grad():
-            model.to(torch.device('cpu'))
-            output = model(input_image)
-            probabilities = F.softmax(output, dim=1)
-            confidence, predicted = torch.max(probabilities, 1)
 
     # Decode the predicted class
     class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
