@@ -14,6 +14,7 @@ class_names = ['Bacterial Pneumonia', 'Viral Pneumonia', 'Normal']
 def load_model(model_url):
     response = requests.get(model_url)
     if response.status_code == 200:
+        st.write("Model loaded successfully")
         model_bytes = BytesIO(response.content)
         model = torch.load(model_bytes, map_location=torch.device('cpu'))
         if isinstance(model, OrderedDict):
@@ -30,6 +31,7 @@ def load_model(model_url):
         else:
             return None
     else:
+        st.write("Failed to load model")
         return None
 
 # Function to preprocess image
