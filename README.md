@@ -9,3 +9,7 @@ This project leverages 5 models trained via transfer learning. These models are 
 - SqueezeNet 1.1
 - ResNet-18
 - EfficientNet-B0
+
+----------------------
+
+### 🗂️ II. Dataset
