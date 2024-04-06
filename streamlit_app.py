@@ -9,12 +9,12 @@ from efficientnet_pytorch import EfficientNet
 import torch.nn.functional as F
 
 # Define the paths of the saved models
-mobilenet_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/mobilenetv2_model.pth"
-shufflenet_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/shufflenetv2_model.pth"
-squeezenet_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/squeezenet1_1_model.pth"
-resnet_model_path_1 = "https://github.com/yourusername/yourrepo/raw/main/models/resnet18_model_part1.pth"
-resnet_model_path_2 = "https://github.com/yourusername/yourrepo/raw/main/models/resnet18_model_part2.pth"
-efficient_net_model_path = "https://github.com/yourusername/yourrepo/raw/main/models/efficientnetb0_model.pth"
+mobilenet_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/Models/mobilenetv2_model.pth"
+shufflenet_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/Models/shufflenetv2_model.pth"
+squeezenet_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/Models/squeezenet1_1_model.pth"
+resnet_model_path_1 = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/Models/resnet18_model/resnet18_model.pth.part1"
+resnet_model_path_2 = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/Models/resnet18_model/resnet18_model.pth.part2"
+efficient_net_model_path = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/Models/efficientnetb0_model.pth"
 
 # Load the models from the saved paths
 mobilenet_model = mobilenet_v2(pretrained=True)
