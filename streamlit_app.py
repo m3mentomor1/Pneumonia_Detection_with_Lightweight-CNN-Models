@@ -49,7 +49,7 @@ if uploaded_image is not None:
         confidence, predicted = torch.max(probabilities, 1)
 
     # Decode the predicted class
-    class_names = ['Normal', 'Bacterial Pneumonia', 'Viral Pneumonia']
+    class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
     predicted_class = class_names[predicted.item()]
 
     # Display the prediction
