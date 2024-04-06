@@ -38,7 +38,7 @@ if uploaded_image is not None:
     # Display the uploaded image
     st.image(test_image, caption='Uploaded Image', use_column_width=True)
 
-    # Apply transformations to the uploaded image
+    # Apply transformations to the test image
     input_image = transform(test_image).unsqueeze(0)
 
     # Make prediction
@@ -48,10 +48,16 @@ if uploaded_image is not None:
         probabilities = torch.softmax(output, dim=1)
         confidence, predicted = torch.max(probabilities, 1)
 
-    # Decode the predicted class
+    # Define the class names
     class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
+    
+    # Decode the predicted class
     predicted_class = class_names[predicted.item()]
+
+    # Calculate confidence percentage
+    confidence_percentage = round(confidence.item() * 100, 2)
+    confidence_decimal = round(confidence.item(), 4)
 
     # Display the prediction
     st.write(f"Predicted Class: {predicted_class}")
-    st.write(f"Confidence: {confidence.item()}")
+    st.write(f"Confidence: {confidence_percentage}% ({confidence_decimal})")
