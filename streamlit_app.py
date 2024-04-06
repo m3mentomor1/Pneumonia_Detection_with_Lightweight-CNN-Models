@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
-from torchvision.models import mobilenet_v2
+from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0
 from PIL import Image
 import requests
 import io
@@ -9,14 +9,28 @@ import io
 # Define the base URL of the GitHub repository
 base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/"
 
-# Define the path of the saved model
+# Define the paths of the saved models
 mobilenet_model_path = base_url + "mobilenetv2_model.pth"
+shufflenet_model_path = base_url + "shufflenetv2_model.pth"
 
-# Load the model from the saved path
-mobilenet_model = mobilenet_v2(pretrained=False)
-mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-mobilenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu')))
-mobilenet_model.eval()
+# Header
+st.title("Pneumonia Detection in Chest X-ray Images")
+
+# Model selection
+selected_model = st.selectbox("Select Model", ["MobileNetV2", "ShuffleNetV2"])
+
+if selected_model == "MobileNetV2":
+    # Load the MobileNetV2 model
+    model = mobilenet_v2(pretrained=False)
+    model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
+    model.load_state_dict(torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu')))
+elif selected_model == "ShuffleNetV2":
+    # Load the ShuffleNetV2 model
+    model = shufflenet_v2_x1_0(pretrained=False)
+    model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
+    model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
+else:
+    st.error("Invalid model selection")
 
 # Define the transformations for input images
 transform = transforms.Compose([
@@ -24,9 +38,6 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
-
-# Header
-st.title("Pneumonia Detection in Chest X-ray Images")
 
 # Upload image
 uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
@@ -43,8 +54,8 @@ if uploaded_image is not None:
 
     # Make prediction
     with torch.no_grad():
-        mobilenet_model.to(torch.device('cpu'))
-        output = mobilenet_model(input_image)
+        model.to(torch.device('cpu'))
+        output = model(input_image)
         probabilities = torch.softmax(output, dim=1)
         confidence, predicted = torch.max(probabilities, 1)
 
@@ -59,5 +70,6 @@ if uploaded_image is not None:
     confidence_decimal = round(confidence.item(), 4)
 
     # Display the prediction
+    st.write(f"Model: {selected_model}")
     st.write(f"Predicted Class: {predicted_class}")
     st.write(f"Confidence: {confidence_percentage}% ({confidence_decimal})")
