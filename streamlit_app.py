@@ -3,7 +3,6 @@ import torch
 import torchvision.transforms as transforms
 from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, squeezenet1_1, resnet18
 from PIL import Image
-import pandas as pd
 import matplotlib.pyplot as plt
 from efficientnet_pytorch import EfficientNet
 import torch.nn.functional as F
@@ -74,9 +73,6 @@ if uploaded_image is not None:
     # Display the uploaded image
     st.image(test_image, caption='Uploaded Image', use_column_width=True)
 
-    # Create a dataframe to store the predictions for this image
-    predictions = {'Model': [], 'Predicted Class': [], 'Real Class': [], 'Correct': [], 'Confidence': []}
-
     # Iterate through each model and make predictions
     for model_name, model in models.items():
         if model_name == "ResNet-18":
@@ -106,15 +102,7 @@ if uploaded_image is not None:
         class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
         predicted_class = class_names[predicted.item()]
 
-        # Add the predictions to the dictionary
-        predictions['Model'].append(model_name)
-        predictions['Predicted Class'].append(predicted_class)
-        predictions['Real Class'].append("N/A")  # Real class not available when using uploaded image
-        predictions['Correct'].append("N/A")  # Correctness not available when using uploaded image
-        predictions['Confidence'].append(round(confidence.item(), 4))  # Round to 4 decimal places
-
-    # Create a dataframe from the predictions dictionary
-    df = pd.DataFrame(predictions)
-
-    # Display the dataframe
-    st.write(df)
+        # Display the prediction
+        st.write(f"Model: {model_name}")
+        st.write(f"Predicted Class: {predicted_class}")
+        st.write(f"Confidence: {round(confidence.item(), 4)}")
