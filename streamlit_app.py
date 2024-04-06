@@ -1,49 +1,35 @@
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
-from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, squeezenet1_1, resnet18
+from torchvision.models import mobilenet_v2
 from PIL import Image
-import matplotlib.pyplot as plt
-from efficientnet_pytorch import EfficientNet
-import torch.nn.functional as F
 import requests
 import io
-import zipfile
+import torch.nn.functional as F
 
 # Define the base URL of the GitHub repository
 base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/"
 
-# Function to download and extract zip files
-def download_and_extract_zip(url, target_path):
-    response = requests.get(url)
-    with zipfile.ZipFile(io.BytesIO(response.content), 'r') as zip_ref:
-        zip_ref.extractall(target_path)
+# Define the path of the saved model
+mobilenet_model_path = base_url + "mobilenetv2_model.pth"
 
-# Define the URLs of the zip files
-resnet_model_zip_url_1 = base_url + "resnet18_model/resnet18_model.zip"
-resnet_model_zip_url_2 = base_url + "resnet18_model/resnet18_model.zip"
+# Load the MobileNet-V2 model
+mobilenet_model = mobilenet_v2(pretrained=False)
+mobilenet_model.classifier[1] = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
 
-# Define target paths for extracted files
-target_path_1 = 'temp/resnet18_model'
-target_path_2 = 'temp/resnet18_model'
+try:
+    # Load the model's state dict from the provided path
+    state_dict = torch.load(io.BytesIO(requests.get(mobilenet_model_path).content), map_location=torch.device('cpu'))
+    mobilenet_model.load_state_dict(state_dict)
+    st.success("MobileNet-V2 model loaded successfully!")
+except Exception as e:
+    st.error(f"Error loading MobileNet-V2 model: {e}")
 
-# Download and extract the zip files
-download_and_extract_zip(resnet_model_zip_url_1, target_path_1)
-download_and_extract_zip(resnet_model_zip_url_2, target_path_2)
+# Header
+st.title("Pneumonia Detection in Chest X-ray Images")
 
-# Define the paths of the extracted model files
-resnet_model_path_1 = 'temp/resnet18_model/resnet18_model.pth.part1'
-resnet_model_path_2 = 'temp/resnet18_model/resnet18_model.pth.part2'
-
-# Load the models from the extracted paths
-resnet_model_1 = resnet18(pretrained=False)
-resnet_model_1.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
-resnet_model_1.load_state_dict(torch.load(resnet_model_path_1, map_location=torch.device('cpu')))
-resnet_model_1.eval()
-
-resnet_model_2 = torch.load(resnet_model_path_2, map_location=torch.device('cpu'))
-resnet_model_2.fc = torch.nn.Linear(in_features=512, out_features=3, bias=True)
-resnet_model_2.eval()
+# Upload image
+uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
 # Define the transformations for input images
 transform = transforms.Compose([
@@ -52,48 +38,34 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-# Define the models dictionary
-models = {
-    "ResNet-18": [resnet_model_1, resnet_model_2]
-}
+# Function to make predictions
+def predict(image):
+    # Ensure the image is not None
+    if image is not None:
+        # Load the uploaded image
+        img = Image.open(image).convert('RGB')
 
-# Header
-st.title("Pneumonia Detection in Chest X-ray Images")
+        # Display the uploaded image
+        st.image(img, caption='Uploaded Image', use_column_width=True)
 
-# Upload image
-uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+        # Apply transformations to the test image
+        input_image = transform(img).unsqueeze(0)
 
-# Model selection
-selected_model = st.selectbox("Select Model", list(models.keys()))
+        # Make prediction
+        with torch.no_grad():
+            mobilenet_model.to(torch.device('cpu'))
+            output = mobilenet_model(input_image)
+            probabilities = F.softmax(output, dim=1)
+            confidence, predicted = torch.max(probabilities, 1)
 
-if uploaded_image is not None:
-    # Load the uploaded image
-    test_image = Image.open(uploaded_image).convert('RGB')
+        # Decode the predicted class
+        class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
+        predicted_class = class_names[predicted.item()]
 
-    # Display the uploaded image
-    st.image(test_image, caption='Uploaded Image', use_column_width=True)
+        # Display the prediction
+        st.write(f"Predicted Class: {predicted_class}")
+        st.write(f"Confidence: {round(confidence.item(), 4)}")
 
-    # Use the selected model for prediction
-    model = models[selected_model]
-
-    if selected_model == "ResNet-18":
-        output = []
-        for resnet_model in model:
-            # Apply transformations to the test image
-            input_image = transform(test_image).unsqueeze(0)
-
-            # Make prediction
-            with torch.no_grad():
-                resnet_model.to(torch.device('cpu'))
-                output.append(F.softmax(resnet_model(input_image), dim=1))
-        probabilities = torch.mean(torch.stack(output), dim=0)
-        confidence, predicted = torch.max(probabilities, 1)
-
-    # Decode the predicted class
-    class_names = ['Bacterial Pneumonia', 'Normal', 'Viral Pneumonia']
-    predicted_class = class_names[predicted.item()]
-
-    # Display the prediction
-    st.write(f"Model: {selected_model}")
-    st.write(f"Predicted Class: {predicted_class}")
-    st.write(f"Confidence: {round(confidence.item(), 4)}")
+# Button to trigger prediction
+if st.button('Predict'):
+    predict(uploaded_image)
