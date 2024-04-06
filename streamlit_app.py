@@ -34,6 +34,20 @@ def load_model(model_url):
         st.write("Failed to load model")
         return None
 
+# Function to load ResNet-18 model
+def load_resnet18_model(model_url_part1, model_url_part2):
+    response_part1 = requests.get(model_url_part1)
+    response_part2 = requests.get(model_url_part2)
+    if response_part1.status_code == 200 and response_part2.status_code == 200:
+        st.write("ResNet-18 model loaded successfully")
+        model_bytes = BytesIO(response_part1.content + response_part2.content)
+        model = torch.load(model_bytes, map_location=torch.device('cpu'))
+        model.eval()
+        return model
+    else:
+        st.write("Failed to load ResNet-18 model")
+        return None
+
 # Function to preprocess image
 def preprocess_image(image):
     # Convert to RGB if image mode is not RGB
@@ -74,7 +88,9 @@ elif model_name == 'SqueezeNet 1.1':
     model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/squeezenet1_1_model.pth'
     model = load_model(model_url)
 elif model_name == 'ResNet-18':
-    st.write("ResNet-18 model loading is not supported in this version of the app.")
+    model_url_part1 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part1'
+    model_url_part2 = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/resnet18_model/resnet18_model.pth.part2'
+    model = load_resnet18_model(model_url_part1, model_url_part2)
 elif model_name == 'EfficientNet-B0':
     model_url = 'https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/efficientnetb0_model.pth'
     model = load_model(model_url)
