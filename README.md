@@ -13,3 +13,4 @@ This project leverages 5 models trained via transfer learning. These models are 
 ----------------------
 
 ### 🗂️ II. Dataset
+![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/ac6adea5-0215-4ee9-b20b-d64a56e9237c)
