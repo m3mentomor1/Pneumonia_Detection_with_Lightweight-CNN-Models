@@ -49,7 +49,7 @@ else:
     st.error("Invalid model selection")
 
 # Upload image
-uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+uploaded_image = st.file_uploader("Upload a chest X-ray image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
     # Load the uploaded image
