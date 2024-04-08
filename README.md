@@ -21,8 +21,8 @@ This project leverages 5 models trained via transfer learning. These models are 
 
 **Source:** D. Kermany, K. Zhang, and M. Goldbaum, “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification,” data.mendeley.com, vol. 2, Jun. 2018, doi: https://doi.org/10.17632/rscbjbr9sj.2.
 
-**Download Dataset Here:** 
-‌
+**Download Dataset Here:** https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/
+
 
 
 
