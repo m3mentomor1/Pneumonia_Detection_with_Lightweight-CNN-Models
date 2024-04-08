@@ -16,7 +16,7 @@ This project leverages 5 models trained via transfer learning. These models are 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/ac6adea5-0215-4ee9-b20b-d64a56e9237c)
 
 #### Chest X-Ray Images
-- The dataset is structured into three main directories: 'train', 'val', & 'test'. Within each directory, there are subfolders representing different image categories, namely 'Bacterial Pneumonia', 'Viral Pneumonia', & 'Normal'. Altogether, the dataset comprises 4,353 chest X-ray images in JPEG format, distributed across the three classes in each set.
+- The dataset is structured into three main directories: **train**, **val**, & **test**. Within each directory, there are subfolders representing different image categories, namely **Bacterial Pneumonia**, **Viral Pneumonia**, & **Normal**. Altogether, the dataset comprises 4,353 chest X-ray images in JPEG format, distributed across the three classes in each set.
 - These chest X-ray images were chosen from retrospective cohorts of pediatric patients aged 1-5 years old at the Guangzhou Women and Children’s Medical Center, Guangzhou. The chest X-ray imaging was conducted as part of the routine clinical care for these patients.
 
 
