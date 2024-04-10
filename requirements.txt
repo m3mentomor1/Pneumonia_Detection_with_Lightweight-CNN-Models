@@ -3,5 +3,4 @@ torch
 torchvision
 Pillow
 matplotlib
-efficientnet-pytorch
 requests
