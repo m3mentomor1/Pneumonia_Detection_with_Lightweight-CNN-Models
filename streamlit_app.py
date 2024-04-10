@@ -2,10 +2,10 @@ import streamlit as st
 import torch
 import torchvision.transforms as transforms
 from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, squeezenet1_1
+from efficientnet_pytorch import EfficientNet
 from PIL import Image
 import requests
 import io
-from urllib.parse import urlparse
 
 # Define the base URL of the GitHub repository
 base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/"
@@ -34,18 +34,8 @@ squeezenet_model.classifier[1] = torch.nn.Conv2d(512, 3, kernel_size=(1, 1), str
 squeezenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(squeezenet_model_path).content), map_location=torch.device('cpu')))
 squeezenet_model.eval()
 
-# Define the EfficientNet-B0 model
-class EfficientNetB0(torch.nn.Module):
-    def __init__(self):
-        super(EfficientNetB0, self).__init__()
-        self.model = torch.hub.load('rwightman/gen-efficientnet-pytorch', 'efficientnet_b0', pretrained=False)
-        self.model.classifier = torch.nn.Linear(self.model.classifier.in_features, 3)
-
-    def forward(self, x):
-        return self.model(x)
-
 # Load the EfficientNet-B0 model
-efficient_net_model = EfficientNetB0()
+efficient_net_model = EfficientNet.from_name('efficientnet-b0', num_classes=3, pretrained=False)
 efficient_net_model.load_state_dict(torch.load(io.BytesIO(requests.get(efficient_net_model_path).content), map_location=torch.device('cpu')))
 efficient_net_model.eval()
 
