@@ -30,7 +30,7 @@ All models are trained using identical batch sizes, epochs, & data preprocessing
 
 - a free and open-source Python framework to rapidly build and share beautiful machine learning and data science web apps. 
 ##
-The model is deployed on **Streamlit**, allowing for a straightforward and accessible user interface where users can conveniently do breast cancer image classification.
+The model is deployed on **Streamlit**, allowing for a straightforward and accessible user interface where users can conveniently do pneumonia detection.
 
 **Access the app here:** https://pneumoniadetectionwithlightweight-cnn-models-6sgynwffygezemyf8.streamlit.app/
 
