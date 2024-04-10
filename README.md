@@ -8,6 +8,8 @@ This project leverages 3 models trained via transfer learning. These models are 
 - ShuffleNet-V2
 - SqueezeNet 1.1
 
+All models are trained using identical batch sizes, epochs, & data preprocessing techniques to ensure a fair comparison of their performance.
+
 ----------------------
 
 ### 🗂️ II. Dataset
