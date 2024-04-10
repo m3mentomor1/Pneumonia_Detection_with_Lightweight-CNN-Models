@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
-from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, SqueezeNet
+from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, squeezenet1_1
 from PIL import Image
 import requests
 import io
