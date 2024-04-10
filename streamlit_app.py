@@ -28,8 +28,8 @@ shufflenet_model.eval()
 
 # Load the SqueezeNet 1.1 model
 squeezenet_model = squeezenet1_1(pretrained=True)
-squeezenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
-squeezenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
+squeezenet_model.classifier[1] = nn.Conv2d(512, num_classes, kernel_size=(1, 1), stride=(1, 1))
+squeezenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(squeezenet_model_path).content), map_location=torch.device('cpu')))
 squeezenet_model.eval()
 
 # Define the transformations for input images
