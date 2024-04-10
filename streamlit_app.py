@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
-from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0
+from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, SqueezeNet
 from PIL import Image
 import requests
 import io
@@ -12,6 +12,7 @@ base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-
 # Define the paths of the saved models
 mobilenet_model_path = base_url + "mobilenetv2_model.pth"
 shufflenet_model_path = base_url + "shufflenetv2_model.pth"
+squeezenet_model_path = base_url + "squeezenett1_1_model.pth"
 
 # Load the MobileNetV2 model
 mobilenet_model = mobilenet_v2(pretrained=False)
@@ -24,6 +25,12 @@ shufflenet_model = shufflenet_v2_x1_0(pretrained=False)
 shufflenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
 shufflenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
 shufflenet_model.eval()
+
+# Load the SqueezeNet 1.1 model
+squeezenet_model = squeezenet1_1(pretrained=True)
+squeezenet_model.fc = torch.nn.Linear(in_features=1024, out_features=3, bias=True)
+squeezenet_model.load_state_dict(torch.load(io.BytesIO(requests.get(shufflenet_model_path).content), map_location=torch.device('cpu')))
+squeezenet_model.eval()
 
 # Define the transformations for input images
 transform = transforms.Compose([
@@ -45,6 +52,9 @@ if selected_model == "MobileNetV2":
 elif selected_model == "ShuffleNetV2":
     model = shufflenet_model
     model_name = "ShuffleNetV2"
+elif selected_model == "SqueezeNet 1.1":
+    model = shufflenet_model
+    model_name = "SqueezeNet 1.1"
 else:
     st.error("Invalid model selection")
 
