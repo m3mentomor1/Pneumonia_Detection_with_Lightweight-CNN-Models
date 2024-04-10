@@ -37,7 +37,7 @@ squeezenet_model.eval()
 # Load the EfficientNet-B0 model
 efficient_net_model = EfficientNet.from_name('efficientnet-b0')
 efficient_net_model._fc = torch.nn.Linear(in_features=1280, out_features=3, bias=True)
-efficient_net_model.load_state_dict(torch.load(efficient_net_model_path, map_location=torch.device('cpu')))
+efficient_net_model.load_state_dict(torch.load(io.BytesIO(requests.get(efficient_net_model_path).content), map_location=torch.device('cpu')))
 efficient_net_model.eval()
 
 # Define the transformations for input images
