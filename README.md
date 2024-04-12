@@ -24,7 +24,7 @@ All models are trained using identical batch sizes, epochs, & data preprocessing
 **Download Dataset Here:** 
 https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/
 
-Re-structured | https://drive.google.com/drive/folders/17RAWWpF2voDNdMZxU-wXoiMBxCQO2b09?usp=sharing
+Re-structured: https://drive.google.com/drive/folders/17RAWWpF2voDNdMZxU-wXoiMBxCQO2b09?usp=sharing
 
 ----------------------
 
