@@ -22,8 +22,7 @@ All models are trained using identical batch sizes, epochs, & data preprocessing
 **Source:** D. Kermany, K. Zhang, and M. Goldbaum, “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification,” data.mendeley.com, vol. 2, Jun. 2018, doi: https://doi.org/10.17632/rscbjbr9sj.2.
 
 **Download Dataset Here:** 
-
-Unstructured | https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/
+https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/
 
 Re-structured | https://drive.google.com/drive/folders/17RAWWpF2voDNdMZxU-wXoiMBxCQO2b09?usp=sharing
 
