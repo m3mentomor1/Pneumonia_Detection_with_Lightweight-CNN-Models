@@ -5,6 +5,7 @@ from torchvision.models import mobilenet_v2, shufflenet_v2_x1_0, squeezenet1_1
 from PIL import Image
 import requests
 import io
+import time
 
 # Define the base URL of the GitHub repository
 base_url = "https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/raw/main/Models/"
@@ -71,10 +72,12 @@ if uploaded_image is not None:
     # Apply transformations to the test image
     input_image = transform(test_image).unsqueeze(0)
 
-    # Make prediction
+    # Make prediction and measure inference time
     with torch.no_grad():
         model.to(torch.device('cpu'))
+        start_time = time.time()
         output = model(input_image)
+        inference_time_ms = (time.time() - start_time) * 1000  # Convert to milliseconds
         probabilities = torch.softmax(output, dim=1)
         confidence, predicted = torch.max(probabilities, 1)
 
@@ -88,7 +91,8 @@ if uploaded_image is not None:
     confidence_percentage = round(confidence.item() * 100, 2)
     confidence_decimal = round(confidence.item(), 4)
 
-    # Display the prediction
+    # Display the prediction and inference time
     st.write(f"Model: {model_name}")
     st.write(f"Predicted Class: {predicted_class}")
     st.write(f"Confidence: {confidence_percentage}% ({confidence_decimal})")
+    st.write(f"Inference Time: {inference_time_ms:.2f} ms")
