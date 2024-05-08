@@ -44,7 +44,7 @@ transform = transforms.Compose([
 st.title("Pneumonia Detection in Chest X-ray Images")
 
 # Model selection
-selected_model = st.selectbox("Select a model", ["MobileNet-V2", "ShuffleNet-V2", "SqueezeNet 1.1"])
+selected_model = st.selectbox("Select a model", ["MobileNet-V2", "ShuffleNet-V2", "SqueezeNet"])
 
 # Determine selected model
 if selected_model == "MobileNet-V2":
@@ -53,9 +53,9 @@ if selected_model == "MobileNet-V2":
 elif selected_model == "ShuffleNet-V2":
     model = shufflenet_model
     model_name = "ShuffleNet-V2"
-elif selected_model == "SqueezeNet 1.1":
+elif selected_model == "SqueezeNet":
     model = squeezenet_model
-    model_name = "SqueezeNet 1.1"
+    model_name = "SqueezeNet"
 else:
     st.error("Invalid model selection")
 
