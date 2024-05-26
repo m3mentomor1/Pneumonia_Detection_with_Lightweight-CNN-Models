@@ -1,4 +1,6 @@
-# Pneumonia Detection with Lightweight CNN Models
+<div align="center">
+  <h1>Pneumonia Detection with Lightweight CNN Models</h1>
+</div>
 
 ### 🧐 I. Overview
 This project aims to compare the performance of three lightweight CNN models in identifying the presence of pneumonia in chest X-ray images, categorizing them into three classes: **Bacterial Pneumonia**, **Viral Pneumonia**, or **Normal**.
