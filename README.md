@@ -26,12 +26,12 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 **Download Dataset Here:** 
 - [Kaggle (Unstructured)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/)
 - [Re-structured](https://drive.google.com/drive/folders/17RAWWpF2voDNdMZxU-wXoiMBxCQO2b09?usp=sharing)
-
+<br><br>
 ##
 
 ### 💻 III. Tech Stack
 ``Python`` ``PyTorch`` ``scikit-learn`` ``Pandas`` ``NumPy`` ``Matplotlib`` ``Seaborn`` ``Azure ML Studio``
-
+<br><br>
 ##
 
 ### 🧾 IV. Model Evaluation
@@ -103,7 +103,7 @@ MobileNetV2 strikes a balance between model size and inference speed. ShuffleNet
 <br>Access the overall evaluation here: 
 - [model_training-evaluation.ipynb](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_training-evaluation.ipynb)
 - [model_prediction.ipynb](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_prediction.ipynb)
-
+<br><br>
 ##
 
 ### 🛠️ V. Use this repository
@@ -115,7 +115,7 @@ MobileNetV2 strikes a balance between model size and inference speed. ShuffleNet
    git clone https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models.git
    ```
 (Optional: You can also ```Fork``` this repository.)
-
+<br><br>
 ##
 
 ### 🚀 VI. Model Deployment
