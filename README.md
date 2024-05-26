@@ -1,14 +1,14 @@
 # Pneumonia Detection with Lightweight CNN Models
 
 ### 🧐 I. Overview
-This repository contains a project focused on identifying the presence of pneumonia in chest X-ray images. Each image can be classified into one of three categories: **Bacterial Pneumonia**, **Viral Pneumonia**, or **Normal**.
+This project aims to compare the performance of lightweight CNN models in identifying the presence of pneumonia in chest X-ray images, categorizing them into three classes: **Bacterial Pneumonia**, **Viral Pneumonia**, or **Normal**.
 
-This project leverages 3 models trained via transfer learning. These models are adapted from the following pre-trained lightweight convolutional neural network (CNN) architectures to perform multiclass image classification:
+Three lightweight convolutional neural network (CNN) architectures are employed & fine-tuned through transfer learning for multiclass image classification on chest X-ray images.
 - MobileNet-V2
 - ShuffleNet-V2
-- SqueezeNet 1.1
+- SqueezeNet
 
-All models are trained using identical batch sizes, epochs, & data preprocessing techniques to ensure a fair comparison of their performance.
+To ensure a fair evaluation, all models have undergone training with the same batch sizes, epochs, & data preprocessing techniques.
 
 ----------------------
 
