@@ -30,7 +30,10 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 ##
 
 ### 🛠️ IV. Use this repository
-#### A. Model Training
+
+### A. Training
+
+### B. Deployment
 
 ##
 
