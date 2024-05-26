@@ -49,11 +49,8 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 ##
 
 ### 🚀 III. Model Deployment
-<img src="https://github.com/m3mentomor1/Breast-Cancer-Image-Classification-with-DenseNet121/assets/95956735/6d0001fd-6890-44aa-8f25-223b21e8ab39" width="300" />
 
-- a free and open-source Python framework to rapidly build and share beautiful machine learning and data science web apps. 
-##
-The model is deployed on **Streamlit**, allowing for a straightforward and accessible user interface where users can conveniently do pneumonia detection.
+The three models are deployed on a single web app on [**Streamlit**](https://streamlit.io/).
 
 **Access the app here:** https://pneumoniadetectionwithlightweight-cnn-models-6sgynwffygezemyf8.streamlit.app/
 
