@@ -46,7 +46,8 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 ### **Training & Validation Accuracy per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a716a6dd-78ef-4b6b-af33-37a615acd368)
 
-
+### **Training & Validation Loss per Epoch**
+![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/c3f0aa82-8e8f-4c3d-99fc-0b7eff33522a)
 
 ##
 
