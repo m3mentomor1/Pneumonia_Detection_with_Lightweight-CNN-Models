@@ -36,12 +36,18 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ### 🧾 IV. Model Evaluation
 
-### **Accuracy**
-| Set          | Accuracy (%) |
-|--------------|--------------|
-| Train        | 84.52%       | 
-| Validation   | 85.48%       | 
-| Test         | 90.08%       | 
+### **Overall Accuracy**
+| Model         | Training (%) | Validation (%) | Test (%) |
+|---------------|--------------|----------------|----------|
+| MobileNetV2   | 84.52%       | 85.48%         | 90.08%   |
+| ShuffleNetV2  | 88.56%       | 84.52%         | 88.43%   |
+| SqueezeNet    | 73.78%       | 60.00%         | 56.61%   |
+
+### **Training & Validation Accuracy per Epoch**
+
+**MobileNetV2**
+![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/74b442f4-157d-4b21-8d9e-96826f7f9922)
+
 
 ##
 
