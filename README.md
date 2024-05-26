@@ -44,9 +44,8 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 | SqueezeNet    | 73.78%       | 60.00%         | 56.61%   |
 
 ### **Training & Validation Accuracy per Epoch**
+![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a716a6dd-78ef-4b6b-af33-37a615acd368)
 
-**MobileNetV2**
-![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/74b442f4-157d-4b21-8d9e-96826f7f9922)
 
 
 ##
