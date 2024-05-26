@@ -36,17 +36,17 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ### 🧾 IV. Model Evaluation
 
-#### **Test Accuracy**
+#### **A. Test Accuracy**
 | Model         | Accuracy (%) |
 |---------------|--------------|
 | MobileNetV2   | 90.08%       |
 | ShuffleNetV2  | 88.43%       |
 | SqueezeNet    | 56.61%       |
 
-#### **Training & Validation Accuracy per Epoch**
+#### **B. Training & Validation Accuracy per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/5d6d25b8-5b17-4993-bc1e-1fc5bcb9e11c)
 
-#### **Classification Report**
+#### **C. Classification Report**
 
 **"MobileNetV2"**
 |                     | Precision | Recall | F1-Score |
@@ -55,7 +55,19 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 | Viral Pneumonia     | 0.97      | 0.88   | 0.93     |
 | Normal              | 0.87      | 0.84   | 0.85     |
 
+**"ShuffleNetV2"**
+|                     | Precision | Recall | F1-Score |
+|---------------------|-----------|--------|----------|
+| Bacterial Pneumonia | 0.88      | 0.95   | 0.91     |
+| Viral Pneumonia     | 0.97      | 0.86   | 0.91     |
+| Normal              | 0.82      | 0.84   | 0.83     |
 
+**"SqueezeNet"**
+|                     | Precision | Recall | F1-Score |
+|---------------------|-----------|--------|----------|
+| Bacterial Pneumonia | 0.82      | 0.35   | 0.49     |
+| Viral Pneumonia     | 0.46      | 0.93   | 0.61     |
+| Normal              | 0.79      | 0.42   | 0.55     |
 
 ##
 
