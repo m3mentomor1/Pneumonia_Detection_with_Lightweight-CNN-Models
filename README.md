@@ -11,7 +11,7 @@ Each model employs a corresponding lightweight convolutional neural network (CNN
 - SqueezeNet
 
 For a fair evaluation, all models have been trained using identical batch sizes, epochs, and data preprocessing techniques. Additionally, while the architectures of MobileNetV2, ShuffleNetV2, and SqueezeNet vary in design principles and specific layers, the process of adapting them for chest X-ray image classification remains consistent across all three models. Specifically, only the final fully connected layer of each model is replaced to align with the number of classes in the dataset. This modification enables a fair comparison of the models' performances without further alteration to their respective architectures.
-<br>
+
 ##
 
 ### 🗂️ II. Dataset
