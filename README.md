@@ -31,13 +31,20 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ### 🛠️ IV. Use this repository
 
-### A. Training
+**1. Clone this repository.**
 
-You can download the notebook [here](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_training-evaluation.ipynb).
+   Run this command in your terminal: 
+   ```
+   git clone https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models.git
+   ```
+(Optional: You can also ```Fork``` this repository.)
 
-(Note: The models are trained in **Azure ML Studio**.)
+**2. Go to the repository's main directory.**
 
-### B. Deployment
+   Run this command in your terminal: 
+   ```
+   cd Pneumonia_Detection_with_Lightweight-CNN-Models
+   ```
 
 ##
 
