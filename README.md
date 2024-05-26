@@ -33,6 +33,10 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ### A. Training
 
+You can download the notebook [here](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_training-evaluation.ipynb).
+
+(Note: The models are trained in **Azure ML Studio**.)
+
 ### B. Deployment
 
 ##
