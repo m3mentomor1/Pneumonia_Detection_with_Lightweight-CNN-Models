@@ -49,12 +49,15 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 #### **C. Confusion Matrix**
 
 **"MobileNetV2"**
+
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/4ad21386-68e0-4f84-8190-5b10b30d9e9c)
 
 **"ShuffleNetV2"**
+
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/d5e98fdd-1e44-4034-b8a6-7c3b1300d2cb)
 
 **"SqueezeNet"**
+
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a5c3634b-d16a-4b93-b8d8-204fdb439a81)
 
 #### **D. Classification Report**
