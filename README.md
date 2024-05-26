@@ -36,7 +36,7 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ### 🧾 IV. Model Evaluation
 
-### **Test Accuracy**
+#### **Test Accuracy**
 | Model         | Accuracy (%) |
 |---------------|--------------|
 | MobileNetV2   | 90.08%       |
