@@ -34,7 +34,18 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ##
 
-### 🛠️ IV. Use this repository
+### 🧾 IV. Model Evaluation
+
+### **Accuracy**
+| Set          | Accuracy (%) |
+|--------------|--------------|
+| Train        | 84.52%       | 
+| Validation   | 85.48%       | 
+| Test         | 90.08%       | 
+
+##
+
+### 🛠️ V. Use this repository
 
 **1. Clone this repository.**
 
@@ -46,7 +57,7 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ##
 
-### 🚀 V. Model Deployment
+### 🚀 VI. Model Deployment
 
 The three models are deployed in a single web app on [**Streamlit**](https://streamlit.io/).
 
