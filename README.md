@@ -30,7 +30,7 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 ##
 
 ### 💻 III. Tech Stack
-``PyTorch`` ``scikit-learn`` ``Pandas`` ``NumPy`` ``Matplotlib`` ``Seaborn`` ``Azure ML Studio``
+``Python`` ``PyTorch`` ``scikit-learn`` ``Pandas`` ``NumPy`` ``Matplotlib`` ``Seaborn`` ``Azure ML Studio``
 
 ##
 
