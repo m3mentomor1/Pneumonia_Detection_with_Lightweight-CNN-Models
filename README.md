@@ -29,6 +29,11 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ##
 
+### 💻 III. Tech Stack
+``PyTorch`` ``scikit-learn`` ``Pandas`` ``NumPy`` ``Matplotlib`` ``Seaborn`` ``Azure ML Studio``
+
+##
+
 ### 🛠️ IV. Use this repository
 
 **1. Clone this repository.**
@@ -48,9 +53,9 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 
 ##
 
-### 🚀 III. Model Deployment
+### 🚀 V. Model Deployment
 
-The three models are deployed on a single web app on [**Streamlit**](https://streamlit.io/).
+The three models are deployed in a single web app on [**Streamlit**](https://streamlit.io/).
 
 **Access the app here:** https://pneumoniadetectionwithlightweight-cnn-models-6sgynwffygezemyf8.streamlit.app/
 
