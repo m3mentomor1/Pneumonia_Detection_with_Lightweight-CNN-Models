@@ -49,6 +49,14 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 ### **Training & Validation Loss per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/c3f0aa82-8e8f-4c3d-99fc-0b7eff33522a)
 
+### **AUC-ROC**
+| Model         | Bacterial Pneumonia | Viral Pneumonia | Normal | Overall   |
+|---------------|---------------------|-----------------|--------|-----------|
+| MobileNetV2   | 0.99                | 0.99            | 0.97   | 98.23%    |
+| ShuffleNetV2  | 0.98                | 0.99            | 0.96   | 97.76%    |
+| SqueezeNet    | 0.74                | 0.87            | 0.82   | 81.03%    |
+
+
 ##
 
 ### 🛠️ V. Use this repository
