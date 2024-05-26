@@ -44,7 +44,7 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 | SqueezeNet    | 56.61        |
 
 MobileNetV2 demonstrated the highest accuracy, indicating its strong ability to generalize & perform well on new data beyond the training & validation sets. In contrast, SqueezeNet exhibited the lowest accuracy, indicating challenges in effectively generalizing to new instances.
-<br>
+<br><br>
 #### **B. Training & Validation Accuracy per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/5d6d25b8-5b17-4993-bc1e-1fc5bcb9e11c)
 <br>
