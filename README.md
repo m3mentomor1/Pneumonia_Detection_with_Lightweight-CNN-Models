@@ -83,6 +83,10 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 | Viral Pneumonia     | 0.46      | 0.93   | 0.61     |
 | Normal              | 0.79      | 0.42   | 0.55     |
 
+Access the overall evaluation here: 
+- [model_training-evaluation.ipynb](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_training-evaluation.ipynb)
+- [model_prediction.ipynb](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_prediction.ipynb)
+
 ##
 
 ### 🛠️ V. Use this repository
