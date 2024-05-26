@@ -44,13 +44,6 @@ For a fair evaluation, all models have been trained using identical batch sizes,
    ```
 (Optional: You can also ```Fork``` this repository.)
 
-**2. Go to the repository's main directory.**
-
-   Run this command in your terminal: 
-   ```
-   cd Pneumonia_Detection_with_Lightweight-CNN-Models
-   ```
-
 ##
 
 ### 🚀 V. Model Deployment
