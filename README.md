@@ -43,15 +43,18 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 | ShuffleNetV2  | 88.43%       |
 | SqueezeNet    | 56.61%       |
 
-### **Training & Validation Accuracy per Epoch**
+#### **Training & Validation Accuracy per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/5d6d25b8-5b17-4993-bc1e-1fc5bcb9e11c)
 
-### **AUC-ROC**
-| Model         | Bacterial Pneumonia | Viral Pneumonia | Normal | Overall   |
-|---------------|---------------------|-----------------|--------|-----------|
-| MobileNetV2   | 0.99                | 0.99            | 0.97   | 98.23%    |
-| ShuffleNetV2  | 0.98                | 0.99            | 0.96   | 97.76%    |
-| SqueezeNet    | 0.74                | 0.87            | 0.82   | 81.03%    |
+#### **Classification Report**
+
+**"MobileNetV2"**
+|                     | Precision | Recall | F1-Score |
+|---------------------|-----------|--------|----------|
+| Bacterial Pneumonia | 0.87      | 0.97   | 0.92     |
+| Viral Pneumonia     | 0.97      | 0.88   | 0.93     |
+| Normal              | 0.87      | 0.84   | 0.85     |
+
 
 
 ##
