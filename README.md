@@ -120,7 +120,7 @@ MobileNetV2 strikes a balance between model size and inference speed. ShuffleNet
 
 ### 🚀 VI. Model Deployment
 
-The three models are deployed on [**Streamlit**](https://streamlit.io/). Click this [***link***](https://pneumoniadetectionwithlightweight-cnn-models-6sgynwffygezemyf8.streamlit.app/) to access the app.
+The models are deployed on [**Streamlit**](https://streamlit.io/). Click this [***link***](https://pneumoniadetectionwithlightweight-cnn-models-6sgynwffygezemyf8.streamlit.app/) to access the app.
 
 
 
