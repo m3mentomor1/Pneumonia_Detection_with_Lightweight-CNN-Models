@@ -73,6 +73,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 - Viral Pneumonia: 124 out of 148 cases correctly predicted
 - Normal: 145 out of 164 cases correctly predicted
 <br>
+
 **ShuffleNetV2**
 <br>
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/d5e98fdd-1e44-4034-b8a6-7c3b1300d2cb)
@@ -81,6 +82,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 - Viral Pneumonia: 124 out of 148 cases correctly predicted
 - Normal: 141 out of 164 cases correctly predicted
 <br>
+
 **SqueezeNet**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a5c3634b-d16a-4b93-b8d8-204fdb439a81)
@@ -98,6 +100,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 | Viral Pneumonia     | 0.97      | 0.88   | 0.93     |
 | Normal              | 0.87      | 0.84   | 0.85     |
 <br>
+
 **ShuffleNetV2**
 |                     | Precision | Recall | F1-Score |
 |---------------------|-----------|--------|----------|
@@ -105,6 +108,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 | Viral Pneumonia     | 0.97      | 0.86   | 0.91     |
 | Normal              | 0.82      | 0.84   | 0.83     |
 <br>
+
 **SqueezeNet**
 |                     | Precision | Recall | F1-Score |
 |---------------------|-----------|--------|----------|
