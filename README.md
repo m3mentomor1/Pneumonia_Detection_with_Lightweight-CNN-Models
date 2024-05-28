@@ -49,7 +49,7 @@ These chest X-ray images were chosen from retrospective cohorts of pediatric pat
 
 ### 🧾 IV. Model Evaluation
 
-#### **A. Test Accuracy**
+#### **➜ Test Accuracy**
 | Model         | Accuracy (%) |
 |---------------|--------------|
 | MobileNetV2   | 90.08        |
@@ -58,10 +58,10 @@ These chest X-ray images were chosen from retrospective cohorts of pediatric pat
 
 MobileNetV2 demonstrated the highest accuracy, indicating its strong ability to generalize & perform well on new data beyond the training & validation sets. In contrast, SqueezeNet exhibited the lowest accuracy, indicating challenges in effectively generalizing to new instances.
 <br><br><br>
-#### **B. Training & Validation Accuracy per Epoch**
+#### **➜ Training & Validation Accuracy per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/5d6d25b8-5b17-4993-bc1e-1fc5bcb9e11c)
 <br><br><br>
-#### **C. Confusion Matrix**
+#### **➜ Confusion Matrix**
 
 The values along the diagonal of each matrix represent the number of correctly predicted images classified as **Normal**, **Bacterial Pneumonia**, and **Viral Pneumonia**, indicating the **True Positives (TP)** for each category.
 
@@ -91,7 +91,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 - Viral Pneumonia: 62 out of 148 cases correctly predicted
 - Normal: 152 out of 164 cases correctly predicted
 <br><br><br>
-#### **D. Classification Report**
+#### **➜ Classification Report**
 
 **MobileNetV2**
 |                     | Precision | Recall | F1-Score |
@@ -118,7 +118,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 
 MobileNetV2 demonstrates strong precision and recall scores across all categories, indicating balanced performance in correctly identifying positive cases (true positives) & effectively avoiding false positives & false negatives. ShuffleNetV2 also exhibits respectable precision & recall scores, particularly for the bacterial & viral pneumonia categories. However, SqueezeNet's classification report reveals lower precision & recall scores, especially for bacterial pneumonia, suggesting challenges in accurately identifying positive cases for this category.
 <br><br><br>
-#### **E. Computational Efficiency**
+#### **➜ Computational Efficiency**
 | Model         | Model Size (MB) | Average Inference Speed (ms/image) |
 |---------------|------------------|-----------------------------------|
 | MobileNetV2   | 8.72             | 9.30                              |
