@@ -128,6 +128,13 @@ As observed in the table, MobileNetV2 strikes a balance between model size and i
    git clone https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models.git
    ```
 (Optional: You can also ```Fork``` this repository.)
+
+**2. Go to the repository's main directory.**
+
+   Run this command in your terminal: 
+   ```
+   cd Pneumonia_Detection_with_Lightweight-CNN-Models
+   ```
 <br><br>
 ##
 
