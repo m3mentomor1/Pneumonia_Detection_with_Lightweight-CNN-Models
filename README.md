@@ -69,25 +69,25 @@ The values along the diagonal of each matrix represent the number of correctly p
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/4ad21386-68e0-4f84-8190-5b10b30d9e9c)
 
-Bacterial Pneumonia: 167 out of 172 cases correctly predicted
-Viral Pneumonia: 124 out of 148 cases correctly predicted
-Normal: 145 out of 164 cases correctly predicted
+- Bacterial Pneumonia: 167 out of 172 cases correctly predicted
+- Viral Pneumonia: 124 out of 148 cases correctly predicted
+- Normal: 145 out of 164 cases correctly predicted
 
 **ShuffleNetV2**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/d5e98fdd-1e44-4034-b8a6-7c3b1300d2cb)
 
-Bacterial Pneumonia: 163 out of 172 cases correctly predicted
-Viral Pneumonia: 124 out of 148 cases correctly predicted
-Normal: 141 out of 164 cases correctly predicted
+- Bacterial Pneumonia: 163 out of 172 cases correctly predicted
+- Viral Pneumonia: 124 out of 148 cases correctly predicted
+- Normal: 141 out of 164 cases correctly predicted
 
 **SqueezeNet**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a5c3634b-d16a-4b93-b8d8-204fdb439a81)
 
-Bacterial Pneumonia: 60 out of 172 cases correctly predicted
-Viral Pneumonia: 62 out of 148 cases correctly predicted
-Normal: 152 out of 164 cases correctly predicted
+- Bacterial Pneumonia: 60 out of 172 cases correctly predicted
+- Viral Pneumonia: 62 out of 148 cases correctly predicted
+- Normal: 152 out of 164 cases correctly predicted
 <br><br><br>
 #### **D. Classification Report**
 
