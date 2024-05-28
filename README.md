@@ -31,6 +31,7 @@ The dataset is structured into three main directories: **train**, **val**, & **t
   - Bacterial Pneumonia = 172
   - Viral Pneumonia = 148
   - Normal = 164
+
 These chest X-ray images were chosen from retrospective cohorts of pediatric patients aged 1-5 years old at the Guangzhou Women and Children’s Medical Center, Guangzhou. The chest X-ray imaging was conducted as part of the routine clinical care for these patients.
 
 **Source:** D. Kermany, K. Zhang, and M. Goldbaum, “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification,” data.mendeley.com, vol. 2, Jun. 2018, doi: https://doi.org/10.17632/rscbjbr9sj.2.
