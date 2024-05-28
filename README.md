@@ -63,19 +63,31 @@ MobileNetV2 demonstrated the highest accuracy, indicating its strong ability to 
 <br><br><br>
 #### **C. Confusion Matrix**
 
-**"MobileNetV2"**
+The values along the diagonal of each matrix represent the number of correctly predicted images classified as Normal, Bacterial Pneumonia, and Viral Pneumonia, indicating the True Positives (TP) for each category.
+
+**MobileNetV2**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/4ad21386-68e0-4f84-8190-5b10b30d9e9c)
 
-**"ShuffleNetV2"**
+Bacterial Pneumonia: 167 out of 172 cases correctly predicted
+Viral Pneumonia: 124 out of 148 cases correctly predicted
+Normal: 145 out of 164 cases correctly predicted
+
+**ShuffleNetV2**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/d5e98fdd-1e44-4034-b8a6-7c3b1300d2cb)
 
-**"SqueezeNet"**
+Bacterial Pneumonia: 163 out of 172 cases correctly predicted
+Viral Pneumonia: 124 out of 148 cases correctly predicted
+Normal: 141 out of 164 cases correctly predicted
+
+**SqueezeNet**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a5c3634b-d16a-4b93-b8d8-204fdb439a81)
 
-The values along the diagonal of each matrix indicate the number of correctly predicted images classified as normal, bacterial pneumonia, and viral pneumonia, representing the True Positives (TP). From the first figure, MobileNetV2 exhibited excellent performance by correctly predicting 167 out of 172 cases of Bacterial Pneumonia, 124 out of 148 cases for Viral Pneumonia, and 145 out of 164 cases for images without Pneumonia. In the second figure, ShuffleNetV2 predicted 163 out of 172 Bacterial Pneumonia cases, 124 out of 148 for Viral Pneumonia, and 141 out of 164 for images without Pneumonia. Finally, in the last figure, SqueezeNet's predictions show 60 out of 172 cases for Bacterial Pneumonia, 62 out of 148 for Viral Pneumonia, and 152 out of 164 for images without Pneumonia.
+Bacterial Pneumonia: 60 out of 172 cases correctly predicted
+Viral Pneumonia: 62 out of 148 cases correctly predicted
+Normal: 152 out of 164 cases correctly predicted
 <br><br><br>
 #### **D. Classification Report**
 
