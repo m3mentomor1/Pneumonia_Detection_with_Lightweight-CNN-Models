@@ -96,9 +96,9 @@ MobileNetV2 demonstrates strong precision and recall scores across all categorie
 | ShuffleNetV2  | 4.95             | 9.18                              |
 | SqueezeNet    | 2.77             | 5.79                              |
 
-MobileNetV2 strikes a balance between model size and inference speed. ShuffleNetV2, while smaller in size compared to MobileNetV2, exhibits a slightly faster average inference speed. On the other hand, SqueezeNet distinguishes itself with its compact model size and relatively faster average inference speed. While MobileNetV2 and ShuffleNetV2 offer a balance between model size and speed, SqueezeNet prioritizes compactness, resulting in faster inference speeds at the expense model performance.
+The model sizes were determined from the file sizes after training, and the average inference speed was calculated by predicting 10 chest X-ray images from the test set and averaging the time taken to predict a single image in milliseconds.
 
-(*Note: The model sizes were extracted directly from the file sizes after training, while the average inference speed was computed by predicting 10 chest X-ray images from the test set and then averaging the time taken to predict a single image in milliseconds.*)
+As observed in the table, MobileNetV2 strikes a balance between model size and inference speed. ShuffleNetV2, while smaller in size compared to MobileNetV2, exhibits a slightly faster average inference speed. On the other hand, SqueezeNet distinguishes itself with its compact model size and relatively faster average inference speed. While MobileNetV2 and ShuffleNetV2 offer a balance between model size and speed, SqueezeNet prioritizes compactness, resulting in faster inference speeds at the expense model performance.
 
 <br>Access the overall evaluation here: 
 - [model_training-evaluation.ipynb](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_training-evaluation.ipynb)
