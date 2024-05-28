@@ -63,7 +63,7 @@ MobileNetV2 demonstrated the highest accuracy, indicating its strong ability to 
 <br><br><br>
 #### **C. Confusion Matrix**
 
-The values along the diagonal of each matrix represent the number of correctly predicted images classified as Normal, Bacterial Pneumonia, and Viral Pneumonia, indicating the True Positives (TP) for each category.
+The values along the diagonal of each matrix represent the number of correctly predicted images classified as **Normal**, **Bacterial Pneumonia**, and **Viral Pneumonia**, indicating the **True Positives (TP)** for each category.
 
 **MobileNetV2**
 
@@ -72,15 +72,15 @@ The values along the diagonal of each matrix represent the number of correctly p
 - Bacterial Pneumonia: 167 out of 172 cases correctly predicted
 - Viral Pneumonia: 124 out of 148 cases correctly predicted
 - Normal: 145 out of 164 cases correctly predicted
-
+<br>
 **ShuffleNetV2**
-
+<br>
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/d5e98fdd-1e44-4034-b8a6-7c3b1300d2cb)
 
 - Bacterial Pneumonia: 163 out of 172 cases correctly predicted
 - Viral Pneumonia: 124 out of 148 cases correctly predicted
 - Normal: 141 out of 164 cases correctly predicted
-
+<br>
 **SqueezeNet**
 
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/a5c3634b-d16a-4b93-b8d8-204fdb439a81)
@@ -91,21 +91,21 @@ The values along the diagonal of each matrix represent the number of correctly p
 <br><br><br>
 #### **D. Classification Report**
 
-**"MobileNetV2"**
+**MobileNetV2**
 |                     | Precision | Recall | F1-Score |
 |---------------------|-----------|--------|----------|
 | Bacterial Pneumonia | 0.87      | 0.97   | 0.92     |
 | Viral Pneumonia     | 0.97      | 0.88   | 0.93     |
 | Normal              | 0.87      | 0.84   | 0.85     |
-
-**"ShuffleNetV2"**
+<br>
+**ShuffleNetV2**
 |                     | Precision | Recall | F1-Score |
 |---------------------|-----------|--------|----------|
 | Bacterial Pneumonia | 0.88      | 0.95   | 0.91     |
 | Viral Pneumonia     | 0.97      | 0.86   | 0.91     |
 | Normal              | 0.82      | 0.84   | 0.83     |
-
-**"SqueezeNet"**
+<br>
+**SqueezeNet**
 |                     | Precision | Recall | F1-Score |
 |---------------------|-----------|--------|----------|
 | Bacterial Pneumonia | 0.82      | 0.35   | 0.49     |
