@@ -61,13 +61,13 @@ MobileNetV2 demonstrated the highest accuracy, indicating its strong ability to 
 #### **➜ Training & Validation Accuracy per Epoch**
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/5d6d25b8-5b17-4993-bc1e-1fc5bcb9e11c)
 
-The training accuracy of MobileNetV2 steadily increases throughout the epochs, with validation accuracy showing fluctuations, reaching its highest point at later epochs, particularly around epochs 12 to 15. However, validation accuracy also fluctuates during the training process, notably dipping around epochs 4 to 6.
+The training accuracy of **MobileNetV2** steadily increases throughout the epochs, with validation accuracy showing fluctuations, reaching its highest point at later epochs, particularly around epochs 12 to 15. However, validation accuracy also fluctuates during the training process, notably dipping around epochs 4 to 6.
 
-Similarly, ShuffleNetV2 exhibits a gradual increase in training accuracy over the epochs, with validation accuracy fluctuating but generally maintaining a higher level compared to MobileNetV2. The fluctuations in validation accuracy are observed throughout the training epochs, particularly notable dips around epochs 4 and 14.
+Similarly, **ShuffleNetV2** exhibits a gradual increase in training accuracy over the epochs, with validation accuracy fluctuating but generally maintaining a higher level compared to MobileNetV2. The fluctuations in validation accuracy are observed throughout the training epochs, particularly notable dips around epochs 4 and 14.
 
-In contrast, SqueezeNet starts with lower training accuracy compared to MobileNetV2 and ShuffleNetV2, but it shows improvement over time. Validation accuracy remains relatively low throughout training, gradually increasing towards the later epochs, with notable improvements around epochs 6 to 9.
+In contrast, **SqueezeNet** starts with lower training accuracy compared to MobileNetV2 and ShuffleNetV2, but it shows improvement over time. Validation accuracy remains relatively low throughout training, gradually increasing towards the later epochs, with notable improvements around epochs 6 to 9.
 
-Overall, MobileNetV2 and ShuffleNetV2 consistently achieve higher validation accuracies than SqueezeNet, suggesting stronger generalization abilities. While SqueezeNet improves in training accuracy, it struggles to generalize to unseen data, reflected in its lower validation accuracy. This indicates that MobileNetV2 and ShuffleNetV2 are more robust models for this task, while SqueezeNet may require further optimization for better performance on validation data.
+Overall, MobileNetV2 and ShuffleNetV2 consistently achieve higher validation accuracies than SqueezeNet, suggesting stronger generalization abilities. While SqueezeNet improves in training accuracy, it struggles to generalize to unseen data, reflected in its lower validation accuracy. This indicates that MobileNetV2 and ShuffleNetV2 are more robust models for the task at hand.
 <br><br><br>
 #### **➜ Confusion Matrix**
 
