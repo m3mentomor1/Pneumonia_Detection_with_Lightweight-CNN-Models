@@ -18,25 +18,25 @@ For a fair evaluation, all models have been trained using identical batch sizes,
 ![image](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/assets/95956735/ac6adea5-0215-4ee9-b20b-d64a56e9237c)
 
 #### Chest X-Ray Images
-- The dataset is re-structured into three main directories: **train**, **val**, & **test**. Within each directory, there are subfolders representing different image categories, namely **Bacterial Pneumonia**, **Viral Pneumonia**, & **Normal**. Altogether, the dataset comprises 4,353 chest X-ray images in JPEG format, distributed across the three classes in each set:
-  - Training Set = 3559
-    - Bacterial Pneumonia = 1230
-    - Viral Pneumonia = 988
-    - Normal = 1341
-  - Validation Set = 310
-    - Bacterial Pneumonia = 108
-    - Viral Pneumonia = 104
-    - Normal = 98
-  - Test Set = 484
-    - Bacterial Pneumonia = 172
-    - Viral Pneumonia = 148
-    - Normal = 164
-- These chest X-ray images were chosen from retrospective cohorts of pediatric patients aged 1-5 years old at the Guangzhou Women and Children’s Medical Center, Guangzhou. The chest X-ray imaging was conducted as part of the routine clinical care for these patients.
+The dataset is structured into three main directories: **train**, **val**, & **test**. Within each directory, there are subfolders representing different image categories, namely **Bacterial Pneumonia**, **Viral Pneumonia**, & **Normal**. Altogether, the dataset comprises 4,353 chest X-ray images in JPEG format, distributed across the three classes in each set:
+- Training Set = 3559
+  - Bacterial Pneumonia = 1230
+  - Viral Pneumonia = 988
+  - Normal = 1341
+- Validation Set = 310
+  - Bacterial Pneumonia = 108
+  - Viral Pneumonia = 104
+  - Normal = 98
+- Test Set = 484
+  - Bacterial Pneumonia = 172
+  - Viral Pneumonia = 148
+  - Normal = 164
+These chest X-ray images were chosen from retrospective cohorts of pediatric patients aged 1-5 years old at the Guangzhou Women and Children’s Medical Center, Guangzhou. The chest X-ray imaging was conducted as part of the routine clinical care for these patients.
 
 **Source:** D. Kermany, K. Zhang, and M. Goldbaum, “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification,” data.mendeley.com, vol. 2, Jun. 2018, doi: https://doi.org/10.17632/rscbjbr9sj.2.
 
 **Download Dataset Here:** 
-- [Kaggle (Unstructured)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/)
+- [Original](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/)
 - [Re-structured](https://drive.google.com/drive/folders/17RAWWpF2voDNdMZxU-wXoiMBxCQO2b09?usp=sharing)
 <br><br>
 ##
