@@ -136,6 +136,7 @@ As observed in the table, MobileNetV2 strikes a balance between model size and i
    cd Pneumonia_Detection_with_Lightweight-CNN-Models
    ```
 <br>
+
 ##
 
 ### 🚀 VI. Model Deployment
