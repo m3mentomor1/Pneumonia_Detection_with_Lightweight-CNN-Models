@@ -153,6 +153,8 @@ As observed in the table, MobileNetV2 strikes a balance between model size and i
    ```
 (Optional: You can also ```Fork``` this repository.)
 
+<br>
+
 **2. Go to the repository's main directory.**
 
    Run this command in your terminal: 
