@@ -10,7 +10,7 @@ Each model employs a corresponding lightweight convolutional neural network (CNN
 - ShuffleNet-V2
 - SqueezeNet
 
-For a fair evaluation, all models have been trained using identical batch sizes, epochs, and data preprocessing techniques. Additionally, while the architectures of MobileNetV2, ShuffleNetV2, and SqueezeNet vary in design principles and specific layers, the process of adapting them for chest X-ray image classification remains consistent across all three models. Specifically, only the final fully connected layer of each model is replaced to align with the number of classes in the dataset. This modification enables a fair comparison of the models' performances without further alteration to their respective architectures.
+For a fair evaluation, all models have been trained using identical batch sizes, epochs, & data preprocessing techniques. Additionally, while the architectures of MobileNetV2, ShuffleNetV2, & SqueezeNet vary in design principles & specific layers, the process of adapting them for chest X-ray image classification remains consistent across all three models. Specifically, only the final fully connected layer of each model is replaced to align with the number of classes in the dataset. This modification enables a fair comparison of the models' performances without further alteration to their respective architectures.
 <br><br>
 ##
 
@@ -32,9 +32,9 @@ The dataset is structured into three main directories: **train**, **val**, & **t
   - Viral Pneumonia = 148
   - Normal = 164
 
-These chest X-ray images were chosen from retrospective cohorts of pediatric patients aged 1-5 years old at the Guangzhou Women and Children’s Medical Center, Guangzhou. The chest X-ray imaging was conducted as part of the routine clinical care for these patients.
+These chest X-ray images were chosen from retrospective cohorts of pediatric patients aged 1-5 years old at the Guangzhou Women & Children’s Medical Center, Guangzhou. The chest X-ray imaging was conducted as part of the routine clinical care for these patients.
 
-**Source:** D. Kermany, K. Zhang, and M. Goldbaum, “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification,” data.mendeley.com, vol. 2, Jun. 2018, doi: https://doi.org/10.17632/rscbjbr9sj.2.
+**Source:** D. Kermany, K. Zhang, & M. Goldbaum, “Labeled Optical Coherence Tomography (OCT) & Chest X-Ray Images for Classification,” data.mendeley.com, vol. 2, Jun. 2018, doi: https://doi.org/10.17632/rscbjbr9sj.2.
 
 **Download Dataset Here:** 
 - [Original](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia/)
@@ -63,15 +63,15 @@ MobileNetV2 demonstrated the highest accuracy, indicating its strong ability to 
 
 The training accuracy of **MobileNetV2** steadily increases throughout the epochs, with validation accuracy showing fluctuations, reaching its highest point at later epochs, particularly around epochs 12 to 15. However, validation accuracy also fluctuates during the training process, notably dipping around epochs 4 to 6.
 
-Similarly, **ShuffleNetV2** exhibits a gradual increase in training accuracy over the epochs, with validation accuracy fluctuating but generally maintaining a higher level compared to MobileNetV2. The fluctuations in validation accuracy are observed throughout the training epochs, particularly notable dips around epochs 4 and 14.
+Similarly, **ShuffleNetV2** exhibits a gradual increase in training accuracy over the epochs, with validation accuracy fluctuating but generally maintaining a higher level compared to MobileNetV2. The fluctuations in validation accuracy are observed throughout the training epochs, particularly notable dips around epochs 4 & 14.
 
-In contrast, **SqueezeNet** starts with lower training accuracy compared to MobileNetV2 and ShuffleNetV2, but it shows improvement over time. Validation accuracy remains relatively low throughout training, gradually increasing towards the later epochs, with notable improvements around epochs 6 to 9.
+In contrast, **SqueezeNet** starts with lower training accuracy compared to MobileNetV2 & ShuffleNetV2, but it shows improvement over time. Validation accuracy remains relatively low throughout training, gradually increasing towards the later epochs, with notable improvements around epochs 6 to 9.
 
-Overall, MobileNetV2 and ShuffleNetV2 consistently achieve higher validation accuracies than SqueezeNet, suggesting stronger generalization abilities. While SqueezeNet improves in training accuracy, it struggles to generalize to unseen data, reflected in its lower validation accuracy. This indicates that MobileNetV2 and ShuffleNetV2 are more robust models for the task at hand.
+Overall, MobileNetV2 & ShuffleNetV2 consistently achieve higher validation accuracies than SqueezeNet, suggesting stronger generalization abilities. While SqueezeNet improves in training accuracy, it struggles to generalize to unseen data, reflected in its lower validation accuracy. This indicates that MobileNetV2 & ShuffleNetV2 are more robust models for the task at hand.
 <br><br><br>
 #### **➜ Confusion Matrix**
 
-The values along the diagonal of each matrix represent the number of correctly predicted images classified as **Normal**, **Bacterial Pneumonia**, and **Viral Pneumonia**, indicating the **True Positives (TP)** for each category.
+The values along the diagonal of each matrix represent the number of correctly predicted images classified as **Normal**, **Bacterial Pneumonia**, & **Viral Pneumonia**, indicating the **True Positives (TP)** for each category.
 
 **MobileNetV2**
 
@@ -124,7 +124,7 @@ The values along the diagonal of each matrix represent the number of correctly p
 | Viral Pneumonia     | 0.46      | 0.93   | 0.61     |
 | Normal              | 0.79      | 0.42   | 0.55     |
 
-MobileNetV2 demonstrates strong precision and recall scores across all categories, indicating balanced performance in correctly identifying positive cases (true positives) & effectively avoiding false positives & false negatives. ShuffleNetV2 also exhibits respectable precision & recall scores, particularly for the bacterial & viral pneumonia categories. However, SqueezeNet's classification report reveals lower precision & recall scores, especially for bacterial pneumonia, suggesting challenges in accurately identifying positive cases for this category.
+MobileNetV2 demonstrates strong precision & recall scores across all categories, indicating balanced performance in correctly identifying positive cases (true positives) & effectively avoiding false positives & false negatives. ShuffleNetV2 also exhibits respectable precision & recall scores, particularly for the bacterial & viral pneumonia categories. However, SqueezeNet's classification report reveals lower precision & recall scores, especially for bacterial pneumonia, suggesting challenges in accurately identifying positive cases for this category.
 <br><br><br>
 #### **➜ Computational Efficiency**
 | Model         | Model Size (MB) | Average Inference Speed (ms/image) |
@@ -133,9 +133,9 @@ MobileNetV2 demonstrates strong precision and recall scores across all categorie
 | ShuffleNetV2  | 4.95             | 9.18                              |
 | SqueezeNet    | 2.77             | 5.79                              |
 
-The model sizes were determined from the file sizes after training, and the average inference speed was calculated by predicting 10 chest X-ray images from the test set and averaging the time taken to predict a single image in milliseconds.
+The model sizes were determined from the file sizes after training, & the average inference speed was calculated by predicting 10 chest X-ray images from the test set & averaging the time taken to predict a single image in milliseconds.
 
-As observed in the table, MobileNetV2 strikes a balance between model size and inference speed. ShuffleNetV2, while smaller in size compared to MobileNetV2, exhibits a slightly faster average inference speed. On the other hand, SqueezeNet distinguishes itself with its compact model size and relatively faster average inference speed. While MobileNetV2 and ShuffleNetV2 offer a balance between model size and speed, SqueezeNet prioritizes compactness, resulting in faster inference speeds at the expense model performance.
+As observed in the table, MobileNetV2 strikes a balance between model size & inference speed. ShuffleNetV2, while smaller in size compared to MobileNetV2, exhibits a slightly faster average inference speed. On the other hand, SqueezeNet distinguishes itself with its compact model size & relatively faster average inference speed. While MobileNetV2 & ShuffleNetV2 offer a balance between model size & speed, SqueezeNet prioritizes compactness, resulting in faster inference speeds at the expense model performance.
 
 <br>Access the overall evaluation here: 
 - [model_training-evaluation.ipynb](https://github.com/m3mentomor1/Pneumonia_Detection_with_Lightweight-CNN-Models/blob/main/model_training-evaluation.ipynb)
